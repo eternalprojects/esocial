@@ -34,13 +34,13 @@
  
     <target name="phpcb">
         <exec dir="${basedir}" executable="phpcb" failonerror="false">
-            <arg line="--log ${basedir}/build/logs --source ${basedir} --output ${basedir}/build/codebrowser" />
+            <arg line="-e build,library/Zend,tests --log ${basedir}/build/logs --source ${basedir} --output ${basedir}/build/codebrowser" />
         </exec>
     </target>
  
     <target name="phpunit">
         <exec dir="${basedir}" executable="phpunit" failonerror="true">
-            <arg line="--log-junit ${basedir}/build/logs/phpunit.xml --coverage-clover ${basedir}/clover/clover.xml --coverage-html ${basedir}/build/coverage tests" />
+            <arg line="--bootstrap ${basedir}/tests/bootstrap.php --log-junit ${basedir}/build/logs/phpunit.xml --coverage-clover ${basedir}/clover/clover.xml --coverage-html ${basedir}/build/coverage tests" />
         </exec>
     </target>
  
