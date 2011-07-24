@@ -15,7 +15,7 @@
     </target> 
     <target name="phpcs">
         <exec dir="${basedir}" executable="phpcs" failonerror="false" output="/dev/null">
-            <arg line="--extensions=php --ignore=build/*,tests/* --standard=Zend --tab-width=4 --report=checkstyle --report-file=${basedir}/build/logs/checkstyle.xml ." />
+            <arg line="--extensions=php --ignore=build/*,tests/*,library/Zend/* --standard=Zend --tab-width=4 --report=checkstyle --report-file=${basedir}/build/logs/checkstyle.xml ." />
         </exec>
     </target>
  
@@ -24,7 +24,7 @@
             <arg line="--jdepend-xml=${basedir}/build/logs/jdepend.xml
                        --jdepend-chart=${basedir}/build/dependencies/jdepend.svg
                        --overview-pyramid=${basedir}/build/dependencies/pyramid.svg
-                       --exclude=build,tests
+                       --exclude=build,tests,library/Zend
                        ." />
         </exec>
         <exec dir="${basedir}/build/dependencies" executable="cp" failonerror="false">
