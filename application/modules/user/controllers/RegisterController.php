@@ -6,7 +6,7 @@
  * @version 
  */
 require_once 'Zend/Controller/Action.php';
-class RegisterController extends Zend_Controller_Action
+class User_RegisterController extends Zend_Controller_Action
 {
     /**
      * The default action - show the home page
