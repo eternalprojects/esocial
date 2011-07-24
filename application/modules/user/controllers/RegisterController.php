@@ -14,13 +14,16 @@ class User_RegisterController extends Zend_Controller_Action
     public function indexAction ()
     {
         $config = new Zend_Config_Ini(APPLICATION_PATH . '/modules/user/forms/register.ini','register');
-        $form = new Zend_Form($config->register);
+        $form = new Zend_Form($config);
         if($this->getRequest()->isPost()){
             if($form->isValid($this->getRequest()->getPost())){
                 
             }else{
-                $this->view->form = $form;
+                
             }
+        }else{
+            $this->view->form = $form;
         }
+        
     }
 }
