@@ -19,7 +19,7 @@ class User_RegisterController extends Zend_Controller_Action
             if($form->isValid($this->getRequest()->getPost())){
                 
             }else{
-                
+                $this->view->form = $form;
             }
         }else{
             $this->view->form = $form;
