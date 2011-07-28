@@ -36,7 +36,7 @@ class User_RegisterControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         $this->assertAction($urlParams['action']);
         $this->assertQueryContentContains('h1', 'Create an account');
         $this->assertQuery("form#register-form");
-        $this->assertQuery('<ul class="errors">');
+        $this->assertQuery('errors');
     }
 
 
