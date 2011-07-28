@@ -34,7 +34,9 @@ class User_RegisterControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         $this->assertModule($urlParams['module']);
         $this->assertController($urlParams['controller']);
         $this->assertAction($urlParams['action']);
-        $this->assertQuery('Only letters are allowed in the last name field');
+        $this->assertQueryContentContains('h1', 'Create an account');
+        $this->assertQuery("form#register-form");
+        $this->assertQuery('<ul class="errors">');
     }
 
 
