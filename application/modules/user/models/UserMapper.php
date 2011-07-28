@@ -28,7 +28,8 @@ class User_Model_UserMapper
         'dob' => $user->getDob());
         if (null === ($id = $user->getId())) {
             unset($data['id']);
-            $this->getDbTable()->insert($data);
+            $id = $this->getDbTable()->insert($data);
+            $user->setId($id);
         } else {
             $data['active'] = $user->getActive();
             $this->getDbTable()->update($data, array('id' => $id));
