@@ -23,6 +23,19 @@ class User_RegisterControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         $this->assertQueryContentContains('h1', 'Create an account');
         $this->assertQuery("form#register-form");
     }
+    
+    public function testFormError(){
+        $params = array('action'=>'index', 'controller'=>'register', 'module'=>'user');
+        $urlParams = $this->urlizeOptions($params);
+        $url = $this->url($urlParams);
+        $this->getRequest()->setMethod('POST')->setPost(array('fname'=>'Jesse','lname'=>'2'));
+        $this->dispatch($url);
+        
+        $this->assertModule($urlParams['module']);
+        $this->assertController($urlParams['controller']);
+        $this->assertAction($urlParams['action']);
+        $this->assertQuery('Only letters are allowed in the last name field');
+    }
 
 
 }
