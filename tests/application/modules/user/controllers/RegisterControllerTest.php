@@ -72,6 +72,7 @@ class User_RegisterControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         $this->assertController($urlParams['controller']);
         $this->assertAction($urlParams['action']);
         $this->assertRedirect();
+        echo $this->getResponse()->getBody();
         $mapper = new User_Model_UserMapper();
         $res = $mapper->fetchAll();
         $this->assertGreaterThan(0, count($res));
