@@ -5,6 +5,9 @@ class User_RegisterControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 
     public function setUp()
     {
+        $this->application = new Zend_Application(APPLICATION_ENV, APPLICATION_PATH . '/configs/application.ini');
+        $this->application->bootstrap();
+        $this->getFrontController()->setParam('bootstrap', $this->application->getBootstrap());
         
         parent::setUp();
     }
