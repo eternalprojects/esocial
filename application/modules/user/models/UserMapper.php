@@ -63,7 +63,7 @@ class User_Model_UserMapper
             $entry->setPassword($row->password);
             $entry->setEmail($row->email);
             $entry->setFname($row->fname);
-            $entry->setLname($row->lanme);
+            $entry->setLname($row->lname);
             $entry->setDob($row->dob);
             $entry->setactive($row->active);
             $entry->setLastLogin($row->last_login);
