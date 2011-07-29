@@ -62,8 +62,8 @@ class User_RegisterControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
                 	'lname'=>'Lesperance',
                     'email'=>'jesse@jplesperance.com',
                     'username'=>'jlswebdev',
-                    'password'=>'password',
-                    'password2'=>'password',
+                    'password'=>'Password1',
+                    'password2'=>'Password1',
                     'dob'=>'2000-01-01'
                 )
             );
@@ -72,7 +72,7 @@ class User_RegisterControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         $this->assertController($urlParams['controller']);
         $this->assertAction($urlParams['action']);
         $this->assertRedirect();
-        echo $this->getResponse()->getBody();
+        
         $mapper = new User_Model_UserMapper();
         $res = $mapper->fetchAll();
         $this->assertGreaterThan(0, count($res));
