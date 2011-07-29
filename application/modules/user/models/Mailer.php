@@ -46,7 +46,7 @@ class User_Model_Mailer
 		$mail = new Zend_Mail();
 		$mail->addTo($user->getEmail(), $user->getFname() . " " . $user->getLname());
 		$mail->setFrom(Zend_Registry::get('config')->email->noreply, Zend_Registry::get('config')->email->name);
-		$mail->setSubject('Information regarding your new account at '. Zend_Registry::get('config')->site>name);
+		$mail->setSubject('Information regarding your new account at '. Zend_Registry::get('config')->site->name);
 		Zend_Mail::setDefaultTransport(new Zend_Mail_Transport_Smtp('mail.jplesperance.me', array('auth'=>'login','username'=>'jesse','password'=>'Denise48')));
 		$mail->setBodyHtml("Thank you for registering at " . Zend_Registry::get('config')->site->name .".</p>
 		<p>To login in to your new account, we just need you to verify your email address and activate your account, 
