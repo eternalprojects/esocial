@@ -59,14 +59,14 @@ class User_Model_UserMapper
         foreach ($resultSet as $row) {
             $entry = new User_Model_User();
             $entry->setId($row->id);
-            $entry->setUsername($row->username)
-                ->setPassword($row->password)
-                ->setEmail($row->email)
-                ->setFname($row->fname)
-                ->setLname($row->lanme)
-                ->setDob($row->dob)
-                ->setactive($row->active)
-                ->setLastLogin($row->last_login);
+            $entry->setUsername($row->username);
+            $entry->setPassword($row->password);
+            $entry->setEmail($row->email);
+            $entry->setFname($row->fname);
+            $entry->setLname($row->lanme);
+            $entry->setDob($row->dob);
+            $entry->setactive($row->active);
+            $entry->setLastLogin($row->last_login);
             $entries[] = $entry;
         }
         return $entries;
