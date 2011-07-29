@@ -90,7 +90,7 @@ class User_RegisterControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
     	$params = array('action'=>'index', 'controller'=>'register', 'module'=>'user');
         $urlParams = $this->urlizeOptions($params);
         $url = $this->url($urlParams);
-        $this->dispaatch($url);
+        $this->dispatch($url);
         $this->assertQueryContentContains('h2', 'Great Job');
         $this->assertModule($urlParams['module']);
         $this->assertController($urlParams['controller']);
