@@ -117,6 +117,7 @@ class User_RegisterControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
                 )
             );
         $this->dispatch($url);
+        var_dump($this->getResponse()->getHeaders());
         $this->assertModule($urlParams['module']);
         $this->assertController($urlParams['controller']);
         $this->assertAction($urlParams['action']);
