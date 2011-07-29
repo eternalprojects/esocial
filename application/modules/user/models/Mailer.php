@@ -40,8 +40,9 @@ class User_Model_Mailer
 	 * Generate and send email regarding registration confirmation
 	 * 
 	 * @param User_Model_User $user
+	 * @static
 	 */
-	public function sendRegistrationConfirmation(User_Model_User $user){
+	public static function sendRegistrationConfirmation(User_Model_User $user){
 		$mail = new Zend_Mail();
 		$mail->addTo($user->getEmail(), $user->getFname() . " " . $user->getLname());
 		$mail->setFrom(Zend_Registry::get('config')->email.noreply, Zend_Registry::get('config')->email.reply.name);

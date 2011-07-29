@@ -58,6 +58,7 @@ class User_RegisterController extends Zend_Controller_Action
                     $this->view->form = $form;
                 }else{
                     $mapper->save($user);
+                    User_Model_Mailer::sendRegistrationConfirmation($user);
                     $this->_helper->redirector('success');
                 }
             }else{
