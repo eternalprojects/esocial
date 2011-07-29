@@ -71,16 +71,31 @@ class User_RegisterControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         $this->assertModule($urlParams['module']);
         $this->assertController($urlParams['controller']);
         $this->assertAction($urlParams['action']);
-        $this->assertRedirect();
+        $this->assertRedirectTo('/user/register/success');
         
         $mapper = new User_Model_UserMapper();
         $res = $mapper->fetchAll();
         $this->assertGreaterThan(0, count($res));
         foreach ($res as $user){
             $this->assertInstanceOf('User_Model_User', $user);
+            $this->assertEquals(0, $user->getActive());
+            $this->assertEquals('0000-00-00', $user->getLastLogin());
+            $this->assertEquals('jlswebdev', $this->getUsername);
             $num = $mapper->delete($user);
             $this->assertEquals(1, $num);
         }
+    }
+    
+    public function testSuccessAction(){
+    	$params = array('action'=>'index', 'controller'=>'register', 'module'=>'user');
+        $urlParams = $this->urlizeOptions($params);
+        $url = $this->url($urlParams);
+        $this->dispaatch($url);
+        $this->assertQueryContentContains('h2', 'Great Job');
+        $this->assertModule($urlParams['module']);
+        $this->assertController($urlParams['controller']);
+        $this->assertAction($urlParams['action']);
+        $this->assertNotRedirect();
     }
 
 
