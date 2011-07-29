@@ -80,7 +80,7 @@ class User_RegisterControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
             $this->assertInstanceOf('User_Model_User', $user);
             $this->assertEquals(0, $user->getActive());
             $this->assertEquals('0000-00-00 00:00:00', $user->getLastLogin());
-            $this->assertEquals('jlswebdev', $user->getUsername);
+            $this->assertEquals('jlswebdev', $user->getUsername());
             $num = $mapper->delete($user);
             $this->assertEquals(1, $num);
         }
