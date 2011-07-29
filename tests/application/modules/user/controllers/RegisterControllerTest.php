@@ -9,7 +9,7 @@ class User_RegisterControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         $this->application->bootstrap();
         $this->getFrontController()->setParam('bootstrap', $this->application->getBootstrap());
         
-        parent::setUp();
+       
     }
     
     public function tearDown() {
