@@ -72,6 +72,11 @@ class User_Model_UserMapper
         return $entries;
     }
     
+    public final function delete(User_Model_User $user){
+        $table = $this->getDbTable();
+        return $table->delete($table->getAdapter()->quoteInto('id = ?', $user->getId()));
+    }
+    
     public function checkUsername(User_Model_User $user){
         $table = $this->getDbTable();
         $select = $table->select()->where('username = ?', $user->getUsername());

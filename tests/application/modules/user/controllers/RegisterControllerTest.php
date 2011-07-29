@@ -66,6 +66,11 @@ class User_RegisterControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         $mapper = new User_Model_UserMapper();
         $res = $mapper->fetchAll();
         $this->assertEquals(1, count($results));
+        foreach ($res as $user){
+            $this->assertInstanceOf('User_Model_User', $user);
+            $num = $mapper->delete($user);
+            $this->assertEquals(1, $num);
+        }
     }
 
 
