@@ -15,7 +15,7 @@ class User_RegisterControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
     {
         $params = array('action' => 'index', 'controller' => 'Register', 'module' => 'user');
         $urlParams = $this->urlizeOptions($params);
-        $url = $this->url(array('/register'));
+        $url = $this->url($urlParams);
         $this->dispatch($url);
         
         // assertions
