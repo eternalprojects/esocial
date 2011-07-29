@@ -56,10 +56,10 @@ class User_Model_UserMapper
     {
         $resultSet = $this->getDbTable()->fetchAll();
         $entries = array();
-        foreach($resultSet as $row){
+        foreach ($resultSet as $row) {
             $entry = new User_Model_User();
-            $entry->setId($row->id)
-                ->setUsername($row->username)
+            $entry->setId($row->id);
+            $entry->setUsername($row->username)
                 ->setPassword($row->password)
                 ->setEmail($row->email)
                 ->setFname($row->fname)
@@ -71,30 +71,32 @@ class User_Model_UserMapper
         }
         return $entries;
     }
-    
-    public final function delete(User_Model_User $user){
+    public final function delete (User_Model_User $user)
+    {
         $table = $this->getDbTable();
-        return $table->delete($table->getAdapter()->quoteInto('id = ?', $user->getId()));
+        return $table->delete(
+        $table->getAdapter()
+            ->quoteInto('id = ?', $user->getId()));
     }
-    
-    public function checkUsername(User_Model_User $user){
+    public function checkUsername (User_Model_User $user)
+    {
         $table = $this->getDbTable();
         $select = $table->select()->where('username = ?', $user->getUsername());
         $result = $table->fetchRow($select);
-        if(1 == count($result)){
+        if (1 == count($result)) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
-    
-    public function checkEmail(User_Model_User $user){
-    $table = $this->getDbTable();
+    public function checkEmail (User_Model_User $user)
+    {
+        $table = $this->getDbTable();
         $select = $table->select()->where('email = ?', $user->getEmail());
         $result = $table->fetchRow($select);
-        if(1 == count($result)){
+        if (1 == count($result)) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
