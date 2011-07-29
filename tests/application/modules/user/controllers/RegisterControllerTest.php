@@ -79,7 +79,7 @@ class User_RegisterControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         foreach ($res as $user){
             $this->assertInstanceOf('User_Model_User', $user);
             $this->assertEquals(0, $user->getActive());
-            $this->assertEquals('0000-00-00', $user->getLastLogin());
+            $this->assertEquals('0000-00-00 00:00:00', $user->getLastLogin());
             $this->assertEquals('jlswebdev', $this->getUsername);
             $num = $mapper->delete($user);
             $this->assertEquals(1, $num);
@@ -87,11 +87,10 @@ class User_RegisterControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
     }
     
     public function testSuccessAction(){
-    	$params = array('action'=>'index', 'controller'=>'register', 'module'=>'user');
+    	$params = array('action'=>'success', 'controller'=>'register', 'module'=>'user');
         $urlParams = $this->urlizeOptions($params);
         $url = $this->url($urlParams);
         $this->dispatch($url);
-        var_dump($this->getResponse()->getBody());
         $this->assertQueryContentContains('h2', 'Great Job');
         $this->assertModule($urlParams['module']);
         $this->assertController($urlParams['controller']);
