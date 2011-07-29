@@ -129,13 +129,9 @@ class User_RegisterControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
     }
     
     private function _insertTestUser(){
-    	$params = array('action'=>'index', 'controller'=>'register', 'module'=>'user');
-        $urlParams = $this->urlizeOptions($params);
-        $url = $this->url($urlParams);
-        $this->getRequest()
-            ->setMethod('POST')
-            ->setPost(
-                array(
+    	$mapper = new User_Model_UserMapper();
+    	$user = new User_Model_User(
+    				array(
                 	'fname'=>'Jesse',
                 	'lname'=>'Lesperance',
                     'email'=>'jesse@jplesperance.com',
@@ -145,7 +141,7 @@ class User_RegisterControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
                     'dob'=>'2000-01-01'
                 )
             );
-        $this->dispatch($url);
+        $mapper->save($user);
         return;
     }
 
