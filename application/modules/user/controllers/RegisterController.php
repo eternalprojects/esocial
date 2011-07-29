@@ -75,4 +75,8 @@ class User_RegisterController extends Zend_Controller_Action
     public function successAction(){
         $this->view->data = "Great Job";
     }
+    
+    public function activateAction(){
+        
+    }
 }
