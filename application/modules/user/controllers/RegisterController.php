@@ -77,6 +77,17 @@ class User_RegisterController extends Zend_Controller_Action
     }
     
     public function activateAction(){
-        
+        $id = $this->_request->getParam('id');
+        $hash = $this->_request->getParam('code');
+        $mapper = new User_Model_UserMapper();
+        $user = new User_Model_User();
+        $mapper->find($id, $user);
+        if($code == md5($user->getEmail())){
+        	$user->setActive(1);
+        	$mapper->save($user);
+        	$this->_redirect('/user/register/activated');
+        }else{
+        	$this->view->data = "There was an error while activating your account.  Please try again later.";
+        }
     }
 }
