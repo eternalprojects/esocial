@@ -81,7 +81,7 @@ class User_RegisterController extends Zend_Controller_Action
         $hash = $this->_request->getParam('code');
         $mapper = new User_Model_UserMapper();
         $user = new User_Model_User();
-        $mapper->find($id, $user);
+        $user = $mapper->find($id, $user);
         if($hash == md5($user->getEmail())){
         	$user->setActive(1);
         	$mapper->save($user);

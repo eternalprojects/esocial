@@ -51,6 +51,8 @@ class User_Model_UserMapper
             ->setDob($row->dob)
             ->setactive($row->active)
             ->setLastLogin($row->last_login);
+            
+    	return $user;
     }
     public function fetchAll ()
     {
