@@ -43,14 +43,14 @@ class User_Model_UserMapper
         }
         $row = $result->current();
         $user->setId($id);
-            $entry->setUsername($row->username);
-            $entry->setPassword($row->password);
-            $entry->setEmail($row->email);
-            $entry->setFname($row->fname);
-            $entry->setLname($row->lname);
-            $entry->setDob($row->dob);
-            $entry->setactive($row->active);
-            $entry->setLastLogin($row->last_login);
+            $user->setUsername($row->username);
+            $user->setPassword($row->password);
+            $user->setEmail($row->email);
+            $user->setFname($row->fname);
+            $user->setLname($row->lname);
+            $user->setDob($row->dob);
+            $user->setactive($row->active);
+            $user->setLastLogin($row->last_login);
             
     	return $user;
     }
