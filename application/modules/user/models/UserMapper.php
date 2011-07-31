@@ -42,7 +42,7 @@ class User_Model_UserMapper
             return;
         }
         $row = $result->current();
-        $user->setId($id)
+        $user->setId($id);
             $entry->setUsername($row->username);
             $entry->setPassword($row->password);
             $entry->setEmail($row->email);
