@@ -153,11 +153,11 @@ class User_RegisterControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         $user = $entry[0];
         $this->assertEquals(0, $user->getActive());
         $url = "/activate/".$user->getId() ."/" . md5($user->getEmail());
-        var_dump($url);
         $this->dispatch($url);
         $this->assertModule('user');
         $this->assertController('register');
         $this->assertAction('activate');
+        $user = $mapper->find($user->getId(), $user);
         $this->assertEquals(1, $user->getActive());
         $this->assertRedirect();
         $this->assertRedirectTo('/activate/success');
