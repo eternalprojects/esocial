@@ -38,7 +38,7 @@ class User_RegisterControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         $this->dispatch('register');
         $this->assertModule('user');
         $this->assertController('register');
-        $this->assertAction(index);
+        $this->assertAction('index');
         $this->assertNotRedirect();
         $this->assertQueryContentContains('h1', 'Create an account');
         $this->assertQueryContentContains('li', 'Only letters are allowed in the last name field');
@@ -64,7 +64,7 @@ class User_RegisterControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         $this->dispatch('/register');
         $this->assertModule('user');
         $this->assertController('register');
-        $this->assertAction(index);
+        $this->assertAction('index');
         $this->assertRedirect();
         
         $mapper = new User_Model_UserMapper();
@@ -85,8 +85,8 @@ class User_RegisterControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         $this->dispatch('/register/success');
         $this->assertQueryContentContains('h2', 'Great Job');
         $this->assertModule('user');
-        $this->assertController(register);
-        $this->assertAction(success);
+        $this->assertController('register');
+        $this->assertAction('success');
         $this->assertNotRedirect();
     }
     
@@ -153,6 +153,7 @@ class User_RegisterControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         $user = $entry[0];
         $this->assertEquals(0, $user->getActive());
         $url = "/activate/".$user->getId() ."/" . md5($user->getEmail());
+        var_dump($url);
         $this->dispatch($url);
         $this->assertModule('user');
         $this->assertController('register');
