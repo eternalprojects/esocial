@@ -33,14 +33,12 @@ class User_RegisterControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
     }
     
     public function testFormError(){
-        $params = array('action'=>'index', 'controller'=>'register', 'module'=>'user');
-        $urlParams = $this->urlizeOptions($params);
-        $url = $this->url($urlParams);
+        
         $this->getRequest()->setMethod('POST')->setPost(array('fname'=>'Jesse','lname'=>2));
-        $this->dispatch($url);
-        $this->assertModule($urlParams['module']);
-        $this->assertController($urlParams['controller']);
-        $this->assertAction($urlParams['action']);
+        $this->dispatch('register');
+        $this->assertModule('user');
+        $this->assertController('register');
+        $this->assertAction(index);
         $this->assertNotRedirect();
         $this->assertQueryContentContains('h1', 'Create an account');
         $this->assertQueryContentContains('li', 'Only letters are allowed in the last name field');
@@ -49,9 +47,7 @@ class User_RegisterControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
     }
     
     public function testSuccessfulRegister(){
-        $params = array('action'=>'index', 'controller'=>'register', 'module'=>'user');
-        $urlParams = $this->urlizeOptions($params);
-        $url = $this->url($urlParams);
+       
         $this->getRequest()
             ->setMethod('POST')
             ->setPost(
@@ -65,10 +61,10 @@ class User_RegisterControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
                     'dob'=>'2000-01-01'
                 )
             );
-        $this->dispatch($url);
-        $this->assertModule($urlParams['module']);
-        $this->assertController($urlParams['controller']);
-        $this->assertAction($urlParams['action']);
+        $this->dispatch('/register');
+        $this->assertModule('user');
+        $this->assertController('register');
+        $this->assertAction(index);
         $this->assertRedirect();
         
         $mapper = new User_Model_UserMapper();
@@ -85,22 +81,18 @@ class User_RegisterControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
     }
     
     public function testSuccessAction(){
-    	$params = array('action'=>'success', 'controller'=>'register', 'module'=>'user');
-        $urlParams = $this->urlizeOptions($params);
-        $url = $this->url($urlParams);
-        $this->dispatch($url);
+    	
+        $this->dispatch('/register/success');
         $this->assertQueryContentContains('h2', 'Great Job');
-        $this->assertModule($urlParams['module']);
-        $this->assertController($urlParams['controller']);
-        $this->assertAction($urlParams['action']);
+        $this->assertModule('user');
+        $this->assertController(register);
+        $this->assertAction(success);
         $this->assertNotRedirect();
     }
     
     public function testDuplicateUsername(){
     	$this->_insertTestUser();
-    	$params = array('action'=>'index', 'controller'=>'register', 'module'=>'user');
-        $urlParams = $this->urlizeOptions($params);
-        $url = $this->url($urlParams);
+    	
         $this->getRequest()
             ->setMethod('POST')
             ->setPost(
@@ -114,10 +106,10 @@ class User_RegisterControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
                     'dob'=>'2000-01-01'
                 )
             );
-        $this->dispatch($url);
-        $this->assertModule($urlParams['module']);
-        $this->assertController($urlParams['controller']);
-        $this->assertAction($urlParams['action']);
+        $this->dispatch('/register');
+        $this->assertModule('user');
+        $this->assertController('register');
+        $this->assertAction('index');
         $this->assertNotRedirect();
         $this->assertQueryContentContains('h1', 'Create an account');
         $this->assertQueryContentContains('li', 'The username you provided is already in use');
@@ -128,9 +120,7 @@ class User_RegisterControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
     
     public function testDuplicateEmail(){
     	$this->_insertTestUser();
-    	$params = array('action'=>'index', 'controller'=>'register', 'module'=>'user');
-        $urlParams = $this->urlizeOptions($params);
-        $url = $this->url($urlParams);
+    	
         $this->getRequest()
             ->setMethod('POST')
             ->setPost(
@@ -144,15 +134,32 @@ class User_RegisterControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
                     'dob'=>'2000-01-01'
                 )
             );
-        $this->dispatch($url);
-        $this->assertModule($urlParams['module']);
-        $this->assertController($urlParams['controller']);
-        $this->assertAction($urlParams['action']);
+        $this->dispatch('/register');
+        $this->assertModule('user');
+        $this->assertController('register');
+        $this->assertAction('index');
         $this->assertNotRedirect();
         $this->assertQueryContentContains('h1', 'Create an account');
         $this->assertQueryContentContains('li', 'An account is already registered to the email address you provided');
         $this->assertQuery("form#register-form");
         $this->assertQuery('ul');
+        $this->_wipeDb();
+    }
+    
+    public function testActivationSuccess(){
+        $this->_insertTestUser();
+        $mapper = new User_Model_UserMapper();
+        $entry = $mapper->fetchAll();
+        $user = $entry[0];
+        $this->assertEquals(0, $user->getActive());
+        $url = "/activate/".$user->getId() ."/" . md5($user->getEmail());
+        $this->dispatch($url);
+        $this->assertModule('user');
+        $this->assertController('register');
+        $this->assertAction('activate');
+        $this->assertEquals(1, $user->getActive());
+        $this->assertRedirect();
+        $this->assertRedirectTo('/activate/success');
         $this->_wipeDb();
     }
     
