@@ -59,7 +59,7 @@ class User_RegisterController extends Zend_Controller_Action
                 }else{
                     $mapper->save($user);
                     User_Model_Mailer::sendRegistrationConfirmation($user);
-                    $this->_helper->redirector('success');
+                    $this->_redirect('/register/success');
                 }
             }else{
                 $this->view->form = $form;
@@ -85,9 +85,13 @@ class User_RegisterController extends Zend_Controller_Action
         if($hash == md5($user->getEmail())){
         	$user->setActive(1);
         	$mapper->save($user);
-        	$this->_redirect('/user/register/activated');
+        	$this->_redirect('/activate/success');
         }else{
         	$this->view->data = "There was an error while activating your account.  Please try again later.";
         }
+    }
+    
+    public function activated(){
+        
     }
 }
