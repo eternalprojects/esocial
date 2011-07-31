@@ -26,6 +26,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         return $view;
     }
     
+    public function _initRoutes(){
+        $front = Zend_Controller_Front::getInstance();
+        $router = new Zend_Controller_Router_Rewrite();
+        $routes = new Zend_Config_Ini(APPLICATION_PATH .'/configs/routes.ini','routes');
+        $router->addConfig($routes, 'routes');
+        $front->setRouter($router);
+    }
 
 }
 
