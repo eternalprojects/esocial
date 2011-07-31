@@ -25,9 +25,9 @@ class User_RegisterControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         $this->dispatch('/register');
         
         // assertions
-        $this->assertModule($urlParams['module']);
-        $this->assertController($urlParams['controller']);
-        $this->assertAction($urlParams['action']);
+        $this->assertModule('user');
+        $this->assertController('register');
+        $this->assertAction('index');
         $this->assertQueryContentContains('h1', 'Create an account');
         $this->assertQuery("form#register-form");
     }
