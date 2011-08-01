@@ -9,7 +9,7 @@ class RegisterControllerTest extends \Zend\Test\PHPUnit\ControllerTestCase
 
     public function setUp()
     {
-        $this->application = new Zend\Application\Application(APPLICATION_ENV, APPLICATION_PATH . '/configs/application.ini');
+        $this->application = new \Zend\Application\Application(APPLICATION_ENV, APPLICATION_PATH . '/configs/application.ini');
         $this->application->bootstrap();
         $this->getFrontController()->setParam('bootstrap', $this->application->getBootstrap());
         
