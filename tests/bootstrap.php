@@ -13,5 +13,5 @@ set_include_path(implode(PATH_SEPARATOR, array(
     get_include_path(),
 )));
 
-require_once 'Zend/Loader/Autoloader.php';
-Zend\Loader\Autoloader::getInstance();
+require_once 'Zend/Loader/StandardAutoloader.php';
+new \Zend\Loader\StandardAutoloader();
