@@ -19,30 +19,33 @@
  *
  * @category   User
  * @package    Model
- * @subpackage Mail
  * @copyright  Copyright (c) 2011 JPL Web Solutions
  * @author	   Jesse P Lesperance <jesse@jplesperance.me>
  * @license    http://www.gnu.org/licenses/gpl.html GNU General Public License 
  * @version    0.2
  */
 /**
- * The mailer class
  * 
- * This class contains methods related to sending email for all the various 
- * functionality of the User module.
- * 
- * @author Jesse P Lesperance <jesse@jplesperance.me?
- * @since 0.2
+ * namespace
+ *
  */
 namespace User\Model;
 
 use \User\Model\User,
     \Zend\Registry;
 /**
+ * The mailer class
  * 
- * Enter description here ...
- * @author Jesse
- *
+ * This class contains methods related to sending email for all the various 
+ * functionality of the User module.
+ * 
+ * @author Jesse P Lesperance <jesse@jplesperance.me>
+ * @since 0.2
+ * @category User
+ * @package Model
+ * @uses \User\Model\User
+ * @uses \Zend\Registry
+ * @uses \Zend\Mail
  */
 class Mailer
 {

@@ -15,7 +15,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program. If not, see . 
+ * along with this program.
  *
  * @category   User
  * @package    Registration
@@ -23,6 +23,11 @@
  * @author	   Jesse P Lesperance <jesse@jplesperance.me>
  * @license    http://www.gnu.org/licenses/gpl.html GNU General Public License 
  * @version    0.2
+ */
+/**
+ * 
+ * @namespace
+ *
  */
 namespace User;
 
@@ -36,7 +41,12 @@ use \User\Model\User,
  * @package    Registration
  * @author Jesse P Lesperance <jesse@jplesperance.me>
  * @since 0.2
- * @uses Zend_Controller_Action
+ * @uses \Zend\Controller\Action
+ * @uses \Zend\Config\Ini
+ * @uses \Zend\Form\Form
+ * @uses \User\Model\User
+ * @uses \User\Model\Usermapper
+ * @uses \User\Model\Mailer
  */
 class RegisterController extends \Zend\Controller\Action
 {
