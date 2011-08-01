@@ -164,6 +164,16 @@ class User_RegisterControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         $this->_wipeDb();
     }
     
+    public function testActivateSuccess(){
+        $this->dispatch('/activate/success');
+        $this->assertModule('user');
+        $this->assertController('register');
+        $this->assertAction('activated');
+        $this->assertNotRedirect();
+        $this->assertQuery('h2#page-title');
+        $this->assertQueryCountMax('p', 1);
+    }
+    
     private function _insertTestUser(){
     	$mapper = new User_Model_UserMapper();
     	$user = new User_Model_User(
