@@ -14,4 +14,5 @@ set_include_path(implode(PATH_SEPARATOR, array(
 )));
 
 require_once 'Zend/Loader/StandardAutoloader.php';
-new \Zend\Loader\StandardAutoloader();
+$loader = new \Zend\Loader\StandardAutoloader();
+$loader->register();
