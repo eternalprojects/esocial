@@ -2,7 +2,7 @@
 
 // Define path to application directory
 defined('APPLICATION_PATH')
-    || define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/../application'));
+    || define('APPLICATION_PATH', realpath(__DIR__ . '/../application'));
 
 // Define application environment
 defined('APPLICATION_ENV')
@@ -15,10 +15,10 @@ set_include_path(implode(PATH_SEPARATOR, array(
 )));
 
 /** Zend_Application */
-require_once 'Zend/Application.php';
+require_once 'Zend/Application/Application.php';
 
 // Create application, bootstrap, and run
-$application = new Zend_Application(
+$application = new Zend\Application\Application (
     APPLICATION_ENV,
     APPLICATION_PATH . '/configs/application.ini'
 );

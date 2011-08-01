@@ -1,5 +1,6 @@
-#Wed Jul 20 22:43:33 PDT 2011
+#Sun Jul 31 19:33:08 PDT 2011
 eclipse.preferences.version=1
 include_path=0;/eSocial\u00055;org.zend.php.framework.CONTAINER
-phpVersion=php5
+phpVersion=php5.3
+useShortTags=false
 use_asp_tags_as_php=false

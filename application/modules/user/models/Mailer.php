@@ -34,7 +34,17 @@
  * @author Jesse P Lesperance <jesse@jplesperance.me?
  * @since 0.2
  */
-class User_Model_Mailer
+namespace User\Model;
+
+use User\Model\User,
+    Zend\Registry;
+/**
+ * 
+ * Enter description here ...
+ * @author Jesse
+ *
+ */
+class Mailer
 {
 	/**
 	 * Generate and send email regarding registration confirmation
@@ -42,23 +52,23 @@ class User_Model_Mailer
 	 * @param User_Model_User $user
 	 * @static
 	 */
-	public static function sendRegistrationConfirmation(User_Model_User $user){
-		$mail = new Zend_Mail();
+	public static function sendRegistrationConfirmation(User $user){
+		$mail = new Zend\Mail();
 		$mail->addTo($user->getEmail(), $user->getFname() . " " . $user->getLname());
-		$mail->setFrom(Zend_Registry::get('config')->email->noreply, Zend_Registry::get('config')->email->name);
-		$mail->setSubject('Information regarding your new account at '. Zend_Registry::get('config')->site->name);
-		$mail->setBodyHtml("Thank you for registering at " . Zend_Registry::get('config')->site->name .".</p>
+		$mail->setFrom(Registry::get('config')->email->noreply, Registry::get('config')->email->name);
+		$mail->setSubject('Information regarding your new account at '. Registry::get('config')->site->name);
+		$mail->setBodyHtml("Thank you for registering at " . Registry::get('config')->site->name .".</p>
 		<p>To login in to your new account, we just need you to verify your email address and activate your account, 
 		which can be done my clicking on the link below:<br /><br />
-		<a href='".Zend_Registry::get('config')->site->url."/activate/".$user->getId()."/".md5($user->getEmail())."'>Activate Account</a></p>
+		<a href='".Registry::get('config')->site->url."/activate/".$user->getId()."/".md5($user->getEmail())."'>Activate Account</a></p>
 		<p>Please do not reply to this email, as it is an automated response.  If you have any questions and/or issues, please visit our 
-		<a href='".Zend_Registry::get('config')->site->url.">support site</a></p>");
-		$mail->setBodyText("Thank you for registering at " . Zend_Registry::get('config')->site->name .".
+		<a href='".Registry::get('config')->site->url.">support site</a></p>");
+		$mail->setBodyText("Thank you for registering at " . Registry::get('config')->site->name .".
 		To login in to your new account, we just need you to verify your email address and activate your account, 
 		which can be done my clicking on the link below:
-		".Zend_Registry::get('config')->site->url."/activate/".$user->getId()."/".md5($user->getEmail())."
+		".Registry::get('config')->site->url."/activate/".$user->getId()."/".md5($user->getEmail())."
 		  Please do not reply to this email, as it is an automated response.  If you have any questions and/or issues, please visit 
-		".Zend_Registry::get('config')->site->url."/support");
+		".Registry::get('config')->site->url."/support");
 		$mail->send();
 	}
 }

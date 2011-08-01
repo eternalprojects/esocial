@@ -24,27 +24,36 @@
  * @license    http://www.gnu.org/licenses/gpl.html GNU General Public License 
  * @version    0.2
  */
+namespace User;
+
+use User\Model\User,
+    User\Model\UserMapper,
+    User\Model\Mailer;
 /**
  * The Registration Controller
  * 
+ * @category   User
+ * @package    Registration
  * @author Jesse P Lesperance <jesse@jplesperance.me>
  * @since 0.2
  * @uses Zend_Controller_Action
  */
-class User_RegisterController extends Zend_Controller_Action
+class RegisterController extends Zend\Controller\Action
 {
     /**
-     * The default action - show the hregistration form
+     * The default action - show the registration form
+     * 
+     * @return void
      */
     public function indexAction ()
     {
-        $config = new Zend_Config_Ini(
+        $config = new Zend\Config\Ini(
         APPLICATION_PATH . '/modules/user/forms/register.ini', 'register');
-        $form = new Zend_Form($config->register);
+        $form = new Zend\Form\Form($config->register);
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($this->getRequest()->getPost())) {
-                $user = new User_Model_User($form->getValues());
-                $mapper = new User_Model_UserMapper();
+                $user = new User($form->getValues());
+                $mapper = new UserMapper();
                 $bit = 0;
                 if ($mapper->checkUsername($user) == true) {
                     $form->getElement('username')->addError(
@@ -61,7 +70,7 @@ class User_RegisterController extends Zend_Controller_Action
                 } else {
                     $mapper->save($user);
                     if (APPLICATION_ENV != 'testing') {
-                        User_Model_Mailer::sendRegistrationConfirmation($user);
+                        Mailer::sendRegistrationConfirmation($user);
                     }
                     $this->_redirect('/register/success');
                 }
@@ -74,17 +83,24 @@ class User_RegisterController extends Zend_Controller_Action
     }
     /**
      * Display a message stating account registration was successful
+     * 
+     * @return void
      */
     public function successAction ()
     {
         $this->view->data = "Great Job";
     }
+    /**
+     * Logic to activate a user account after registration
+     * 
+     * @return void
+     */
     public function activateAction ()
     {
         $id = $this->_request->getParam('id');
         $hash = $this->_request->getParam('code');
-        $mapper = new User_Model_UserMapper();
-        $user = new User_Model_User();
+        $mapper = new UserMapper();
+        $user = new User();
         $user = $mapper->find($id, $user);
         if ($hash == md5($user->getEmail())) {
             $user->setActive(1);
@@ -94,6 +110,12 @@ class User_RegisterController extends Zend_Controller_Action
             $this->view->data = "There was an error while activating your account.  Please try again later.";
         }
     }
+    /**
+     * 
+     * Display a message confirming account activation
+     * 
+     * @return void
+     */
     public function activatedAction ()
     {}
 }
