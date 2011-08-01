@@ -38,60 +38,62 @@ class User_RegisterController extends Zend_Controller_Action
      */
     public function indexAction ()
     {
-        $config = new Zend_Config_Ini(APPLICATION_PATH . '/modules/user/forms/register.ini','register');
+        $config = new Zend_Config_Ini(
+        APPLICATION_PATH . '/modules/user/forms/register.ini', 'register');
         $form = new Zend_Form($config->register);
-        if($this->getRequest()->isPost()){
-            if($form->isValid($this->getRequest()->getPost())){
+        if ($this->getRequest()->isPost()) {
+            if ($form->isValid($this->getRequest()->getPost())) {
                 $user = new User_Model_User($form->getValues());
                 $mapper = new User_Model_UserMapper();
                 $bit = 0;
-                if($mapper->checkUsername($user) == true){
-                    $form->getElement('username')->addError('The username you provided is already in use');
+                if ($mapper->checkUsername($user) == true) {
+                    $form->getElement('username')->addError(
+                    'The username you provided is already in use');
                     $bit = 1;
                 }
-                if($mapper->checkEmail($user) == true){
-                    $form->getElement('email')->addError('An account is already registered to the email address you provided');
+                if ($mapper->checkEmail($user) == true) {
+                    $form->getElement('email')->addError(
+                    'An account is already registered to the email address you provided');
                     $bit = 1;
                 }
-                
-                if($bit == 1){
+                if ($bit == 1) {
                     $this->view->form = $form;
-                }else{
+                } else {
                     $mapper->save($user);
-                    User_Model_Mailer::sendRegistrationConfirmation($user);
+                    if (APPLICATION_ENV != 'testing') {
+                        User_Model_Mailer::sendRegistrationConfirmation($user);
+                    }
                     $this->_redirect('/register/success');
                 }
-            }else{
+            } else {
                 $this->view->form = $form;
             }
-        }else{
+        } else {
             $this->view->form = $form;
         }
-        
     }
     /**
      * Display a message stating account registration was successful
      */
-    public function successAction(){
+    public function successAction ()
+    {
         $this->view->data = "Great Job";
     }
-    
-    public function activateAction(){
+    public function activateAction ()
+    {
         $id = $this->_request->getParam('id');
         $hash = $this->_request->getParam('code');
         $mapper = new User_Model_UserMapper();
         $user = new User_Model_User();
         $user = $mapper->find($id, $user);
-        if($hash == md5($user->getEmail())){
-        	$user->setActive(1);
-        	$mapper->save($user);
-        	$this->_redirect('/activate/success');
-        }else{
-        	$this->view->data = "There was an error while activating your account.  Please try again later.";
+        if ($hash == md5($user->getEmail())) {
+            $user->setActive(1);
+            $mapper->save($user);
+            $this->_redirect('/activate/success');
+        } else {
+            $this->view->data = "There was an error while activating your account.  Please try again later.";
         }
     }
-    
-    public function activatedAction(){
-        
-    }
+    public function activatedAction ()
+    {}
 }
