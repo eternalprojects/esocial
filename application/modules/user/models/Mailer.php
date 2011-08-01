@@ -52,7 +52,7 @@ class Mailer
 	/**
 	 * Generate and send email regarding registration confirmation
 	 * 
-	 * @param User_Model_User $user
+	 * @param \User\Model\User $user
 	 * @static
 	 */
 	public static function sendRegistrationConfirmation(User $user){
