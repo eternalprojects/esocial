@@ -1,4 +1,5 @@
 <?php
+namespace Application;
 
 class Bootstrap extends Zend\Application\Bootstrap
 {
