@@ -1,11 +1,11 @@
 <?php
 
-class IndexControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
+class IndexControllerTest extends \Zend\Test\PHPUnit\ControllerTestCase
 {
 
     public function setUp()
     {
-        $this->bootstrap = new Zend_Application(APPLICATION_ENV, APPLICATION_PATH . '/configs/application.ini');
+        $this->bootstrap = new Zend\Application\Application(APPLICATION_ENV, APPLICATION_PATH . '/configs/application.ini');
         parent::setUp();
     }
 
