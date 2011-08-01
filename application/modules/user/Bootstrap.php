@@ -2,7 +2,7 @@
 namespace User;
 
 
-class Bootstrap extends Zend\Application\Module\Bootstrap
+class Bootstrap extends \Zend\Application\Module\Bootstrap
 {
 }
 ?>
