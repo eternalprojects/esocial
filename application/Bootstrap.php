@@ -1,6 +1,6 @@
 <?php
-
-class Bootstrap extends \Zend\Application\Bootstrap
+use Zend\Application\Bootstrap as BaseBootstrap;
+class Bootstrap extends BaseBootstrap
 {
 	protected final function _initConfig()
     {
