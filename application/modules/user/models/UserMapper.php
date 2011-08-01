@@ -1,7 +1,7 @@
 <?php
 namespace User\Model;
 
-use User\Model\User;
+use \User\Model\User;
 
 class UserMapper
 {
@@ -12,7 +12,7 @@ class UserMapper
             $dbTable = new $dbTable();
         }
         if (! $dbTable instanceof \Zend\Db\Table) {
-            throw new Exception('Invalid table data gateway provider');
+            throw new \Exception('Invalid table data gateway provider');
         }
         $this->_dbTable = $dbTable;
         return $this;

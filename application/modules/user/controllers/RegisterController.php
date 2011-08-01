@@ -26,9 +26,9 @@
  */
 namespace User;
 
-use User\Model\User,
-    User\Model\UserMapper,
-    User\Model\Mailer;
+use \User\Model\User,
+    \User\Model\UserMapper,
+    \User\Model\Mailer;
 /**
  * The Registration Controller
  * 
@@ -38,7 +38,7 @@ use User\Model\User,
  * @since 0.2
  * @uses Zend_Controller_Action
  */
-class RegisterController extends Zend\Controller\Action
+class RegisterController extends \Zend\Controller\Action
 {
     /**
      * The default action - show the registration form
@@ -47,9 +47,9 @@ class RegisterController extends Zend\Controller\Action
      */
     public function indexAction ()
     {
-        $config = new Zend\Config\Ini(
+        $config = new \Zend\Config\Ini(
         APPLICATION_PATH . '/modules/user/forms/register.ini', 'register');
-        $form = new Zend\Form\Form($config->register);
+        $form = new \Zend\Form\Form($config->register);
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($this->getRequest()->getPost())) {
                 $user = new User($form->getValues());

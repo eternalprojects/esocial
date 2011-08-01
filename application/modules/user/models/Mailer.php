@@ -36,8 +36,8 @@
  */
 namespace User\Model;
 
-use User\Model\User,
-    Zend\Registry;
+use \User\Model\User,
+    \Zend\Registry;
 /**
  * 
  * Enter description here ...
@@ -53,7 +53,7 @@ class Mailer
 	 * @static
 	 */
 	public static function sendRegistrationConfirmation(User $user){
-		$mail = new Zend\Mail();
+		$mail = new \Zend\Mail();
 		$mail->addTo($user->getEmail(), $user->getFname() . " " . $user->getLname());
 		$mail->setFrom(Registry::get('config')->email->noreply, Registry::get('config')->email->name);
 		$mail->setSubject('Information regarding your new account at '. Registry::get('config')->site->name);

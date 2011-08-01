@@ -35,7 +35,7 @@ namespace User\Model\DbTable;
  * @since 0.2
  * @uses Zend_Db_Table_Abstract 
  */
-class User extends Zend\Db\Table\AbstractTable
+class User extends \Zend\Db\Table\AbstractTable
 {
     /**
      * The default table name 
