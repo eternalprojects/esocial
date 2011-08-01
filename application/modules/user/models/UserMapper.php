@@ -1,9 +1,5 @@
 <?php
-namespace User\Model;
-
-use \User\Model\User;
-
-class UserMapper
+class User_Model_UserMapper
 {
     protected $_dbTable;
     final public function setDbTable ($dbTable)
@@ -11,8 +7,8 @@ class UserMapper
         if (is_string($dbTable)) {
             $dbTable = new $dbTable();
         }
-        if (! $dbTable instanceof \Zend\Db\Table) {
-            throw new \Exception('Invalid table data gateway provider');
+        if (! $dbTable instanceof Zend_Db_Table_Abstract) {
+            throw new Exception('Invalid table data gateway provider');
         }
         $this->_dbTable = $dbTable;
         return $this;
@@ -24,7 +20,7 @@ class UserMapper
         }
         return $this->_dbTable;
     }
-    final public function save (User $user)
+    final public function save (User_Model_User $user)
     {
         $data = array('username' => $user->getUsername(), 
         'fname' => $user->getFname(), 'lname' => $user->getLname(), 
@@ -39,7 +35,7 @@ class UserMapper
             $this->getDbTable()->update($data, array('id' => $id));
         }
     }
-    public function find ($id, User $user)
+    public function find ($id, User_Model_User $user)
     {
         $result = $this->getDbTable()->find($id);
         if (0 == count($result)) {
@@ -63,7 +59,7 @@ class UserMapper
         $resultSet = $this->getDbTable()->fetchAll();
         $entries = array();
         foreach ($resultSet as $row) {
-            $entry = new User();
+            $entry = new User_Model_User();
             $entry->setId($row->id);
             $entry->setUsername($row->username);
             $entry->setPassword($row->password);
@@ -77,14 +73,14 @@ class UserMapper
         }
         return $entries;
     }
-    public final function delete (User $user)
+    public final function delete (User_Model_User $user)
     {
         $table = $this->getDbTable();
         return $table->delete(
         $table->getAdapter()
             ->quoteInto('id = ?', $user->getId()));
     }
-    public function checkUsername (User $user)
+    public function checkUsername (User_Model_User $user)
     {
         $table = $this->getDbTable();
         $select = $table->select()->where('username = ?', $user->getUsername());
@@ -95,7 +91,7 @@ class UserMapper
             return false;
         }
     }
-    public function checkEmail (User $user)
+    public function checkEmail (User_Model_User $user)
     {
         $table = $this->getDbTable();
         $select = $table->select()->where('email = ?', $user->getEmail());

@@ -26,18 +26,12 @@
  * @version    0.2
  */
 /**
- * 
- * @namepsace
- *
- */
-namespace User\Model;
-/**
  * A class representation of a row from the users table
  * 
  * @author jesse
  * @since 0.2
  */
-class User
+class User_Model_User
 {
     protected $_id;
     protected $_fname;
@@ -58,7 +52,7 @@ class User
     final public function __set($name, $value){
         $method = 'set' . ucfirst($name);
         if(('mapper' == $name) || !method_exists($this, $method)){
-            throw new \Exception('Invalid user entry');
+            throw new Exception('Invalid user entry');
         }
         $this->$method($value);
     }
@@ -66,7 +60,7 @@ class User
     final public function __get($name){
         $method = 'get' . ucfirst($name);
         if(('mapper' == $name) || !method_exists($this, $method)){
-            throw new \Exception('Invalid user entry');
+            throw new Exception('Invalid user entry');
         }
         return $this->method();
     }

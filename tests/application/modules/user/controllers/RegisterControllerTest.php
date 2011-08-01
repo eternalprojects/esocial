@@ -1,15 +1,11 @@
 <?php
-namespace User;
 
-use \User\Model\User,
-    \User\Model\Usermapper;
-
-class RegisterControllerTest extends \Zend\Test\PHPUnit\ControllerTestCase
+class User_RegisterControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 {
 
     public function setUp()
     {
-        $this->application = new \Zend\Application\Application(APPLICATION_ENV, APPLICATION_PATH . '/configs/application.ini');
+        $this->application = new Zend_Application(APPLICATION_ENV, APPLICATION_PATH . '/configs/application.ini');
         $this->application->bootstrap();
         $this->getFrontController()->setParam('bootstrap', $this->application->getBootstrap());
         
@@ -71,7 +67,7 @@ class RegisterControllerTest extends \Zend\Test\PHPUnit\ControllerTestCase
         $this->assertAction('index');
         $this->assertRedirect();
         
-        $mapper = new UserMapper();
+        $mapper = new User_Model_UserMapper();
         $res = $mapper->fetchAll();
         $this->assertGreaterThan(0, count($res));
         foreach ($res as $user){
@@ -152,7 +148,7 @@ class RegisterControllerTest extends \Zend\Test\PHPUnit\ControllerTestCase
     
     public function testActivationSuccess(){
         $this->_insertTestUser();
-        $mapper = new UserMapper();
+        $mapper = new User_Model_UserMapper();
         $entry = $mapper->fetchAll();
         $user = $entry[0];
         $this->assertEquals(0, $user->getActive());
@@ -179,8 +175,8 @@ class RegisterControllerTest extends \Zend\Test\PHPUnit\ControllerTestCase
     }
     
     private function _insertTestUser(){
-    	$mapper = new UserMapper();
-    	$user = new User(
+    	$mapper = new User_Model_UserMapper();
+    	$user = new User_Model_User(
     				array(
                 	'fname'=>'Jesse',
                 	'lname'=>'Lesperance',
@@ -196,7 +192,7 @@ class RegisterControllerTest extends \Zend\Test\PHPUnit\ControllerTestCase
     }
     
     private function _wipeDb(){
-    	$mapper = new UserMapper();
+    	$mapper = new User_Model_UserMapper();
     	$res = $mapper->fetchAll();
     	if(is_array($res) && count($res) > 0){
     		foreach ($res as $user){
