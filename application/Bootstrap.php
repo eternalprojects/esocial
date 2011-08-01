@@ -1,7 +1,7 @@
 <?php
 namespace Application;
 
-class Bootstrap extends Zend\Application\Bootstrap
+class Bootstrap extends \Zend\Application\Bootstrap
 {
 	protected final function _initConfig()
     {
