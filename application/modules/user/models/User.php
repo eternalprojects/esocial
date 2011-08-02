@@ -28,27 +28,85 @@
 /**
  * A class representation of a row from the users table
  * 
- * @author jesse
+ * @author Jesse Lesperance
  * @since 0.2
  */
 class User_Model_User
 {
+	/**
+	 * The user id
+	 * 
+	 * @var int
+	 */
     protected $_id;
+    /**
+     * The user's first name
+     * 
+     * @var string
+     */
     protected $_fname;
+    /**
+     * The user's last name
+     * 
+     * @var string
+     */
     protected $_lname;
+    /**
+     * The user's username
+     * 
+     * @var string
+     */
     protected $_username;
+    /**
+     * The user's password
+     * 
+     * @var string
+     */
     protected $_password;
+    /**
+     * The user's email address
+     *
+     * @var string
+     */
     protected $_email;
+    /**
+     * The user's date of birth
+     * 
+     * @var date
+     */
     protected $_dob;
+    /**
+     * Whether the user's account is activated
+     * 
+     * @var int 0|1
+     */
     protected $_active;
+    /**
+     * The date of the users last login
+     * 
+     * @var datetime
+     */
     protected $_lastLogin;
-    
+    /**
+     * The class constructor
+     * 
+     * @param array $options
+     * @final
+     * @return void
+     */
     final public function __construct(array $options = null){
         if(is_array($options)){
             $this->setOptions($options);
         }
     }
-    
+    /**
+     * The magic set method
+     * 
+     * @param string $name
+     * @param mixed $value
+     * @throws Exception
+     * @return void
+     */
     final public function __set($name, $value){
         $method = 'set' . ucfirst($name);
         if(('mapper' == $name) || !method_exists($this, $method)){
@@ -56,7 +114,14 @@ class User_Model_User
         }
         $this->$method($value);
     }
-    
+    /**
+     * The magid get method
+     * 
+     * @param string $name
+     * @throws Exception
+     * @return mixed
+     * @final
+     */
     final public function __get($name){
         $method = 'get' . ucfirst($name);
         if(('mapper' == $name) || !method_exists($this, $method)){
