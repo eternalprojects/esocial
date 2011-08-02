@@ -129,7 +129,11 @@ class User_Model_User
         }
         return $this->method();
     }
-    
+    /**
+     * @param array $options
+     * @return User_Model_User
+     * @final
+     */
     final public function setOptions(array $options){
         $methods = get_class_methods($this);
         foreach($options as $key=>$value){
@@ -141,7 +145,7 @@ class User_Model_User
         return $this;
     }
 	/**
-     * @return the $_id
+     * @return int $_id
      */
     public function getId ()
     {
@@ -149,7 +153,7 @@ class User_Model_User
     }
 
 	/**
-     * @return the $_fname
+     * @return string $_fname
      */
     public function getFname ()
     {
@@ -157,7 +161,7 @@ class User_Model_User
     }
 
 	/**
-     * @return the $_lname
+     * @return string $_lname
      */
     public function getLname ()
     {
@@ -165,7 +169,7 @@ class User_Model_User
     }
 
 	/**
-     * @return the $_username
+     * @return string $_username
      */
     public function getUsername ()
     {
@@ -173,7 +177,7 @@ class User_Model_User
     }
 
 	/**
-     * @return the $_password
+     * @return string $_password
      */
     public function getPassword ()
     {
@@ -181,7 +185,7 @@ class User_Model_User
     }
 
 	/**
-     * @return the $_email
+     * @return string $_email
      */
     public function getEmail ()
     {
@@ -189,7 +193,7 @@ class User_Model_User
     }
 
 	/**
-     * @return the $_dob
+     * @return date $_dob
      */
     public function getDob ()
     {
@@ -197,7 +201,7 @@ class User_Model_User
     }
 
 	/**
-     * @return the $_active
+     * @return int $_active
      */
     public function getActive ()
     {
@@ -205,7 +209,7 @@ class User_Model_User
     }
 
 	/**
-     * @return the $_lastLogin
+     * @return datetime $_lastLogin
      */
     public function getLastLogin ()
     {
@@ -213,7 +217,7 @@ class User_Model_User
     }
 
 	/**
-     * @param field_type $_id
+     * @param int $_id
      */
     public function setId ($_id)
     {
@@ -221,7 +225,7 @@ class User_Model_User
     }
 
 	/**
-     * @param field_type $_fname
+     * @param string $_fname
      */
     public function setFname ($_fname)
     {
@@ -229,7 +233,7 @@ class User_Model_User
     }
 
 	/**
-     * @param field_type $_lname
+     * @param string $_lname
      */
     public function setLname ($_lname)
     {
@@ -237,7 +241,7 @@ class User_Model_User
     }
 
 	/**
-     * @param field_type $_username
+     * @param string $_username
      */
     public function setUsername ($_username)
     {
@@ -245,7 +249,7 @@ class User_Model_User
     }
 
 	/**
-     * @param field_type $_password
+     * @param string $_password
      */
     public function setPassword ($_password)
     {
@@ -253,7 +257,7 @@ class User_Model_User
     }
 
 	/**
-     * @param field_type $_email
+     * @param string $_email
      */
     public function setEmail ($_email)
     {
@@ -261,7 +265,7 @@ class User_Model_User
     }
 
 	/**
-     * @param field_type $_dob
+     * @param date $_dob
      */
     public function setDob ($_dob)
     {
@@ -269,7 +273,7 @@ class User_Model_User
     }
 
 	/**
-     * @param field_type $_active
+     * @param int $_active
      */
     public function setActive ($_active)
     {
@@ -277,7 +281,7 @@ class User_Model_User
     }
 
 	/**
-     * @param field_type $_lastLogin
+     * @param datetime $_lastLogin
      */
     public function setLastLogin ($_lastLogin)
     {
@@ -287,4 +291,3 @@ class User_Model_User
     
     
 }
-?>

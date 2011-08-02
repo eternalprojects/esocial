@@ -30,8 +30,6 @@
  * @author Jesse P Lesperance <jesse@jplesperance.me>
  * @since 0.2
  * @uses Zend_Application_Bootstrap_Bootstrap
- * @uses Zend_Config
- * @uses Zend_Registry
  */
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
@@ -39,6 +37,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 	 * Load the application ini settings into the Registry
 	 * 
 	 * @return Zend_Config
+     * @uses Zend_Config
+     * @uses Zend_Registry
 	 */
 	protected final function _initConfig()
     {
@@ -51,6 +51,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 	 * Load the View and set the doc type
 	 * 
 	 * @return Zend_View
+     * @uses Zend_View
+     * @uses Zend_Controller_Action_Helper
 	 */
 	protected final function _initView()
     {
@@ -71,6 +73,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     /**
      * 
      * Load the custom defined routes
+     *
+     * @uses Zend_Controller_Front
+     * @uses Zend_ControllerRouter_Rewrite
+     * @uses Zend_Config_Ini
      */
     public function _initRoutes(){
         $front = Zend_Controller_Front::getInstance();

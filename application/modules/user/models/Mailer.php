@@ -41,6 +41,9 @@ class User_Model_Mailer
 	 * 
 	 * @param User_Model_User $user
 	 * @static
+     * @uses Zend_Mail
+     * @uses Zend_Registry
+     * @since 0.2
 	 */
 	public static function sendRegistrationConfirmation(User_Model_User $user){
 		$mail = new Zend_Mail();
