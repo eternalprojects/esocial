@@ -50,6 +50,7 @@ class User_AuthController extends Zend_Controller_Action
 					$this->_redirect('/');
 				}catch (Exception $e){
 					$this->view->messages = $e->getMessage();
+					$this->view->loginForm = $form;
 				}
 			}else{
 				$this->view->loginForm = $form;
