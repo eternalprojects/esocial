@@ -196,14 +196,18 @@ class User_Model_UserMapper
      * 
      * @param string $username
      * @param string $password
+     * @throws Exception
      * @return User_Model_User
      */
     public function login($username, $password){
     		$user = new User_Model_User();
     		$table = $this->getDbTable();
-        $select = $table->select()->where('username = ?', $username)->where('password = ?', md5($password))->where('active = ?', 1)->limit(1);
+        $select = $table->select()->where('username = ?', $username)->where('password = ?', md5($password))->limit(1);
         if($row = $table->fetchRow($select)){
-        		$user->setId($id);
+        		if($row->active != 1){
+        			Throw new Exception('Account not activated');
+        		}
+        		$user->setId($row->id);
         		$user->setUsername($row->username);
         		$user->setPassword($row->password);
         		$user->setEmail($row->email);
@@ -214,8 +218,7 @@ class User_Model_UserMapper
         		$user->setLastLogin($row->last_login);
         		return $user;
         }else{
-        		// To-do  Change above to query for username and password and then check for active status after
+        		throw new Exception('Invalid username/password combination');
         }
-        
     }
 }
