@@ -1,7 +1,9 @@
 <div align="center">
-<?php foreach($this->messages as $message) { ?>
+<?php if(isset($this->messages)){ 
+foreach($this->messages as $message) { ?>
 <span style="color: red; font-weight: bold"><?php echo $message; ?></span>
-<?php } ?>
+<?php } 
+} ?>
 </div>
 
 <?php echo $this->loginForm; ?>

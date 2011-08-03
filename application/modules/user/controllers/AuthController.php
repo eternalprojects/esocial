@@ -47,11 +47,10 @@ class User_AuthController extends Zend_Controller_Action
 				$mapper = new User_Model_UserMapper();
 				try{
 					$user = 	$mapper->login($form->getValue('username'), $form->getValue('password'));
-					$this->view->messages = "Login Successful";
+					$this->_redirect('/');
 				}catch (Exception $e){
 					$this->view->messages = $e->getMessage();
 				}
-				$this->view->render();
 			}else{
 				$this->view->loginForm = $form;
 				$this->view->messages = "Please correct the errors below";
