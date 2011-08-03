@@ -191,4 +191,31 @@ class User_Model_UserMapper
             return false;
         }
     }
+    /**
+     * Log the user into the system
+     * 
+     * @param string $username
+     * @param string $password
+     * @return User_Model_User
+     */
+    public function login($username, $password){
+    		$user = new User_Model_User();
+    		$table = $this->getDbTable();
+        $select = $table->select()->where('username = ?', $username)->where('password = ?', md5($password))->where('active = ?', 1)->limit(1);
+        if($row = $table->fetchRow($select)){
+        		$user->setId($id);
+        		$user->setUsername($row->username);
+        		$user->setPassword($row->password);
+        		$user->setEmail($row->email);
+        		$user->setFname($row->fname);
+        		$user->setLname($row->lname);
+        		$user->setDob($row->dob);
+        		$user->setactive($row->active);
+        		$user->setLastLogin($row->last_login);
+        		return $user;
+        }else{
+        		// To-do  Change above to query for username and password and then check for active status after
+        }
+        
+    }
 }
