@@ -54,6 +54,9 @@ class User_AuthController extends Zend_Controller_Action
 					$this->_helper->flashMessenger('Login Successful');
 					$this->_redirect('/');
 					return;
+				}else{
+					$this->_helper->flashMessenger('Login Failed');
+					$this->view->loginForm = $form;
 				}
 			}else{
 				$this->view->loginForm = $form;
