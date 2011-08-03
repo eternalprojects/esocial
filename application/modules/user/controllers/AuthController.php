@@ -56,7 +56,7 @@ class User_AuthController extends Zend_Controller_Action
 					return;
 				}
 			}else{
-				$this->view->loginForm = $form
+				$this->view->loginForm = $form;
 			}
 		}else{
 			$this->view->loginForm = $form;
