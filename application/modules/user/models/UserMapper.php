@@ -83,14 +83,16 @@ class User_Model_UserMapper
     {
         $data = array('username' => $user->getUsername(), 
         'fname' => $user->getFname(), 'lname' => $user->getLname(), 
-        'password' => md5($user->getPassword()), 'email' => $user->getEmail(), 
+         'email' => $user->getEmail(), 
         'dob' => $user->getDob());
         if (null === ($id = $user->getId())) {
             unset($data['id']);
+            $data['password'] = md5($user->getPassword());
             $id = $this->getDbTable()->insert($data);
             $user->setId($id);
         } else {
             $data['active'] = $user->getActive();
+            $data['password'] = $user->getPassword();
             $this->getDbTable()->update($data, array('id' => $id));
         }
     }
