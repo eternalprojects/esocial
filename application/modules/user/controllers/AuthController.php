@@ -38,23 +38,23 @@ class User_AuthController extends Zend_Controller_Action
 	}
 	
 	public function loginAction(){
-		if(!$this->getRequest()->isPost()){
-			$this->_redirect('/');
-		}
+		
 		$db = $this->_getParam('db');
 		$forms = new Zend_Config_Ini(APPLICATION_PATH . '/modules/user/forms/register.ini', 'login');
 		$form = new Zend_Form($forms);
-		if($form->isValid($_POST)){
-			$adapter = new Zend_Auth_Adapter_DbTable($db, 'users', 'username','password','active = 1');
-			$adapter->setIdentity($form->getValue('username'));
-			$adapter->setCredential($form->getValue('password'));
-			$auth = Zend_Auth::getInstance();
-			$result = $auth->authenticate($adapter);
+		if(!$this->getRequest()->isPost()){
+			if($form->isValid($_POST)){
+				$adapter = new Zend_Auth_Adapter_DbTable($db, 'users', 'username','password','active = 1');
+				$adapter->setIdentity($form->getValue('username'));
+				$adapter->setCredential($form->getValue('password'));
+				$auth = Zend_Auth::getInstance();
+				$result = $auth->authenticate($adapter);
 			
-			if($result->isValid()){
-				$this->_helper->flashMessenger('Login Successful');
-				$this->_redirect('/');
-				return;
+				if($result->isValid()){
+					$this->_helper->flashMessenger('Login Successful');
+					$this->_redirect('/');
+					return;
+				}
 			}
 		}
 		$this->view->loginForm;
