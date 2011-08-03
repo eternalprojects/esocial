@@ -42,7 +42,7 @@ class User_AuthController extends Zend_Controller_Action
 		$db = $this->_getParam('db');
 		$forms = new Zend_Config_Ini(APPLICATION_PATH . '/modules/user/forms/register.ini', 'login');
 		$form = new Zend_Form($forms);
-		if(!$this->getRequest()->isPost()){
+		if($this->getRequest()->isPost()){
 			if($form->isValid($_POST)){
 				$adapter = new Zend_Auth_Adapter_DbTable($db, 'users', 'username','password','active = 1');
 				$adapter->setIdentity($form->getValue('username'));
@@ -55,8 +55,11 @@ class User_AuthController extends Zend_Controller_Action
 					$this->_redirect('/');
 					return;
 				}
+			}else{
+				$this->view->loginForm = $form
 			}
+		}else{
+			$this->view->loginForm = $form;
 		}
-		$this->view->loginForm = $form;
 	}
 }
