@@ -1,6 +1,6 @@
 <?php
 
-class User_RegisterControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
+class User_AuthControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 {
 
     public function setUp()
