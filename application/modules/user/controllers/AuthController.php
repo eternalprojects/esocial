@@ -44,7 +44,7 @@ class User_AuthController extends Zend_Controller_Action
 		$form = new Zend_Form($forms);
 		if($this->getRequest()->isPost()){
 			if($form->isValid($_POST)){
-				$mapper = new User_Model_Mapper();
+				$mapper = new User_Model_UserMapper();
 				try{
 					$user = 	$mapper->login($form->getValue('username'), $form->getValue('password'));
 					$this->view->messages = "Login Successful";
