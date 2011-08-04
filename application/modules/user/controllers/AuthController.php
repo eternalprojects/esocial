@@ -57,6 +57,7 @@ class User_AuthController extends Zend_Controller_Action
 				$this->view->messages = "Please correct the errors below"; */
 				$adapter = new Zend_Auth_Adapter_DbTable(
 					$db,
+					'users',
 					'username',
 					'password',
 					'active = 1');
@@ -66,6 +67,14 @@ class User_AuthController extends Zend_Controller_Action
 				$result = $auth->authenticate($adapter);
 				if($result->isValid()){
 					$this->_helper->flashMessenger('Login Successful');
+					$user = $adapter->getResultRowObject();
+					try{
+						$auth->getStorage()->write($user);
+					}catch(Zend_Auth_Storage_Exception $e){
+						error_log($e->getMessage());
+						$this->view->messages = "Login Failed";
+						$this->view->loginForm = $form;
+					}
 					$this->_redirect('/');
 					return;
 				}else{
@@ -77,5 +86,10 @@ class User_AuthController extends Zend_Controller_Action
 			$this->view->messages = "Please Login";
 			$this->view->loginForm = $form;
 		}
+	}
+	
+	public function logoutAction(){
+		Zend_Auth::getInstance()->clearIdentity();
+		$this->_redirect('/');
 	}
 }
