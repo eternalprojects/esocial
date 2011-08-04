@@ -44,7 +44,7 @@ class User_AuthController extends Zend_Controller_Action
 		$form = new Zend_Form($forms);
 		if($this->getRequest()->isPost()){
 			if($form->isValid($_POST)){
-				$mapper = new User_Model_UserMapper();
+				/* $mapper = new User_Model_UserMapper();
 				try{
 					$user = 	$mapper->login($form->getValue('username'), $form->getValue('password'));
 					$this->_redirect('/');
@@ -54,7 +54,24 @@ class User_AuthController extends Zend_Controller_Action
 				}
 			}else{
 				$this->view->loginForm = $form;
-				$this->view->messages = "Please correct the errors below";
+				$this->view->messages = "Please correct the errors below"; */
+				$adapter = new Zend_Auth_Adapter_DbTable(
+					$db,
+					'username',
+					'password',
+					'active = 1');
+				$adapter->setIdentity($form->getValue('username'));
+				$adapter->setCredential(md5($form->getValue('password')));
+				$auth = Zend_Auth::getInstance();
+				$result = $auth->authenticate($adapter);
+				if($result->isValid()){
+					$this->_helper->flashMessenger('Login Successful');
+					$this->_redirect('/');
+					return;
+				}else{
+					$this->view->messages = "Login Failed";
+					$this->view->loginForm = $form;
+				}
 			}
 		}else{
 			$this->view->messages = "Please Login";
