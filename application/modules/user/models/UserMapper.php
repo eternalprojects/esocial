@@ -221,7 +221,7 @@ class User_Model_UserMapper
         		$user->setLastLogin($row->last_login);
         		return $user;
         }else{
-        		throw new Exception('Invalid '.$username.'/'.$password.' combination');
+        		throw new Exception('Invalid username/password combination');
         }
     }
 }
