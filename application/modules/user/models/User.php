@@ -38,7 +38,7 @@ class User_Model_User
 	 * 
 	 * @var int
 	 */
-    protected $_id;
+    protected $_id = 0;
     /**
      * The user's first name
      * 
@@ -87,6 +87,12 @@ class User_Model_User
      * @var datetime
      */
     protected $_lastLogin;
+    /**
+     * The role of the user
+     * 
+     * @var string
+     */
+    protected $_role;
     /**
      * The class constructor
      * 
@@ -209,13 +215,21 @@ class User_Model_User
     }
 
 	/**
-     * @return datetime $_lastLogin
+     * @return string $_lastLogin
      */
     public function getLastLogin ()
     {
         return $this->_lastLogin;
     }
-
+    /**
+     * 
+     * Return the users role
+     * 
+     * @return string $_role
+     */
+	public function getRole(){
+		return $this->_role;
+	}
 	/**
      * @param int $_id
      */
@@ -265,7 +279,11 @@ class User_Model_User
     }
 
 	/**
+<<<<<<< .mine
+     * @param string $_dob
+=======
      * @param date $_dob
+>>>>>>> .r152
      */
     public function setDob ($_dob)
     {
@@ -281,13 +299,22 @@ class User_Model_User
     }
 
 	/**
+<<<<<<< .mine
+     * @param string $_lastLogin
+=======
      * @param datetime $_lastLogin
+>>>>>>> .r152
      */
     public function setLastLogin ($_lastLogin)
     {
         $this->_lastLogin = $_lastLogin;
     }
-
-    
+	/**
+	 * 
+	 * @param string $role
+	 */
+    public function setRole($role){
+    		$this->_role = $role;
+    }
     
 }

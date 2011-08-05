@@ -23,6 +23,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `fname` varchar(25) NOT NULL,
   `lname` varchar(75) NOT NULL,
   `dob` date NOT NULL,
+  `role` varchar(25) NOT NULL,
   `active` set('0','1') NOT NULL DEFAULT '0',
   `signup_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `last_login` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',

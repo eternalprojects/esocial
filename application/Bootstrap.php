@@ -44,6 +44,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     {
         $config = new Zend_Config($this->getOptions());
         Zend_Registry::set('config', $config);
+        
+        $fc = Zend_Controller_Front::getInstance();
+        $fc->registerPlugin(new eSocial_Controller_Plugin_Auth());
         return $config;
     }
 	/**
@@ -78,12 +81,38 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
      * @uses Zend_ControllerRouter_Rewrite
      * @uses Zend_Config_Ini
      */
-    public function _initRoutes(){
+    protected function _initRoutes(){
         $front = Zend_Controller_Front::getInstance();
         $router = new Zend_Controller_Router_Rewrite();
         $routes = new Zend_Config_Ini(APPLICATION_PATH .'/configs/routes.ini','routes');
         $router->addConfig($routes, 'routes');
         $front->setRouter($router);
+    }
+    
+    protected function _initUser(){
+    		$auth = Zend_Auth::getInstance();
+    		if($auth->hasIdentity()){
+    			$mapper = new User_Model_UserMapper();
+    			$user = new User_Model_User();
+    			$id = $auth->getStorage()->read();
+    			$user = $mapper->find($id, $user);
+    			$userLastAccess = $user->getLastLogin();
+    			if((time() - $userLastAccess) > 300){
+    				$date = new Zend_Date();
+    				$user->setLastLogin($date->toString('YYY-MM-dd HH:mm:ss'));
+    				$mapper->save($user);
+    			}
+    			Smapp::setCurrentUser($user);
+    		}
+    		return Smapp::getCurrentUser();
+    }
+    
+    protected function _initAcl(){
+    		$acl = Default_Model_Acl::getInstance();
+    		Zend_View_Helper_Navigation_HelperAbstract::setDefaultAcl($acl);
+    		Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole(Smapp::getCurrentUser()->getRole());
+    		Zend_Registry::set('acl', $acl);
+    		return $acl;
     }
 
 }

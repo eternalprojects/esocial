@@ -85,14 +85,16 @@ class User_Model_UserMapper
         'fname' => $user->getFname(), 'lname' => $user->getLname(), 
          'email' => $user->getEmail(), 
         'dob' => $user->getDob());
-        if (null === ($id = $user->getId())) {
+        if (0 == ($id = $user->getId())) {
             unset($data['id']);
             $data['password'] = md5($user->getPassword());
+            $data['role'] = 'user';
             $id = $this->getDbTable()->insert($data);
             $user->setId($id);
         } else {
             $data['active'] = $user->getActive();
             $data['password'] = $user->getPassword();
+            $data['role'] = $user->getRole();
             $this->getDbTable()->update($data, array('id' => $id));
         }
     }
@@ -119,6 +121,7 @@ class User_Model_UserMapper
         $user->setDob($row->dob);
         $user->setactive($row->active);
         $user->setLastLogin($row->last_login);
+        $user->setRole($row->role);
             
     		return $user;
     }
@@ -142,6 +145,7 @@ class User_Model_UserMapper
             $entry->setDob($row->dob);
             $entry->setactive($row->active);
             $entry->setLastLogin($row->last_login);
+            $entry->setRole($row->role);
             $entries[] = $entry;
         }
         return $entries;
@@ -219,6 +223,7 @@ class User_Model_UserMapper
         		$user->setDob($row->dob);
         		$user->setactive($row->active);
         		$user->setLastLogin($row->last_login);
+        		$user->setRole($row->role);
         		return $user;
         }else{
         		throw new Exception('Invalid username/password combination');
