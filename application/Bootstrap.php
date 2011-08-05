@@ -24,6 +24,7 @@
  * @license    http://www.gnu.org/licenses/gpl.html GNU General Public License 
  * @version    0.2
  */
+require_once(APPLICATION_PATH .'/Smapp.php');
 /**
  * The Application Bootstrap class
  * 
