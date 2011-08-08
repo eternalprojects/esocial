@@ -1,5 +1,5 @@
 <?php
-require_once ('application/Bootstrap.php');
+require_once (APPLICATION_PATH .'/Bootstrap.php');
 class Smapp extends Bootstrap
 {
 	protected $_currentUser;
