@@ -60,7 +60,7 @@ class eSocial_Smapp extends Bootstrap
     
     public static function getCurrentUser(){
     		if(null === self::$_currentUser){
-    			self::setCurrentUser(new UserModel_user());
+    			self::setCurrentUser(new User_Model_User());
     		}
     		return self::$_currentUser;
     }
