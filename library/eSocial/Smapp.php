@@ -43,7 +43,7 @@ class eSocial_Smapp extends Bootstrap
 	 * @see User_Model_User::$_id
 	 * @var User_Model_User
 	 */
-	protected $_currentUser;
+	protected static $_currentUser;
 	/**
 	 * The default class constructor
 	 * 
