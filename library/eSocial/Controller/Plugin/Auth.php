@@ -12,8 +12,8 @@ class eSocial_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract
     	if($auth->hasIdentity()){
     		$mapper = new User_Model_UserMapper();
     		$user = new User_Model_User();
-    		$id = (int)$auth->getStorage()->read();
-    		$user = $mapper->find($id, $user);
+    		$ident = (int)$auth->getStorage()->read();
+    		$user = $mapper->find($ident->id, $user);
     		$userLastAccess = $user->getLastLogin();
     		if((time() - $userLastAccess) > 300){
     			$date = new Zend_Date();

@@ -69,7 +69,7 @@ class User_AuthController extends Zend_Controller_Action
 					$this->_helper->flashMessenger('Login Successful');
 					$user = $adapter->getResultRowObject();
 					try{
-						$auth->getStorage()->write($user->id);
+						$auth->getStorage()->write($user);
 					}catch(Zend_Auth_Storage_Exception $e){
 						error_log($e->getMessage());
 						$this->view->messages = "Login Failed";
