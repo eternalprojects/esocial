@@ -1,6 +1,6 @@
 <?php
 require_once ('Zend/Acl.php');
-class Default_Model_Acl extends Zend_Acl
+class Application_Model_Acl extends Zend_Acl
 {
 	const ROLE_GUEST = 'guest';
 	const ROLE_USER = 'user';
@@ -43,7 +43,7 @@ class Default_Model_Acl extends Zend_Acl
 	
 	public static function getInstance(){
 		if(null === self::$_instance){
-			self::$_instance = new Self();
+			self::$_instance = new self();
 		}
 		return self::$_instance;
 	}

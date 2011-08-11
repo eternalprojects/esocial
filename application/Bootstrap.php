@@ -24,7 +24,6 @@
  * @license    http://www.gnu.org/licenses/gpl.html GNU General Public License 
  * @version    0.2
  */
-require_once(APPLICATION_PATH .'/Smapp.php');
 /**
  * The Application Bootstrap class
  * 
@@ -103,15 +102,15 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     				$user->setLastLogin($date->toString('YYY-MM-dd HH:mm:ss'));
     				$mapper->save($user);
     			}
-    			Smapp::setCurrentUser($user);
+    			eSocial_Smapp::setCurrentUser($user);
     		}
-    		return Smapp::getCurrentUser();
+    		return eSocial_Smapp::getCurrentUser();
     }
     
     protected function _initAcl(){
-    		$acl = Default_Model_Acl::getInstance();
+    		$acl = Application_Model_Acl::getInstance();
     		Zend_View_Helper_Navigation_HelperAbstract::setDefaultAcl($acl);
-    		Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole(Smapp::getCurrentUser()->getRole());
+    		Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole(eSocial_Smapp::getCurrentUser()->getRole());
     		Zend_Registry::set('acl', $acl);
     		return $acl;
     }

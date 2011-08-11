@@ -8,8 +8,8 @@ class eSocial_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract
 	private $_noUser = '/login';
 	
 	public function preDispatch(Zend_Controller_Request_Abstract $request){
-		$this->_identity = Smapp::getCurrentUser();
-		$this->_acl = Default_Model_Acl::getInstance();
+		$this->_identity = eSocial_Smapp::getCurrentUser();
+		$this->_acl = Application_Model_Acl::getInstance();
 		
 		if($this->_identity->getRole() != 0){
 			$role = $this->_identity->getRole();
