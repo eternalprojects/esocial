@@ -38,7 +38,7 @@ class eSocial_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract
 					$request->setControllerName('error');
 					$request->setActionName('unauthorized');
 				}
-				throw new Exception('Access denied. ' .$resource . '::' . $role);
+				throw new Exception('Access denied. ' .$resource . ':'.$privelege.':' . $role);
 			}
 		}
 	}
