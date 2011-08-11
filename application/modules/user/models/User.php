@@ -92,7 +92,7 @@ class User_Model_User
      * 
      * @var string
      */
-    protected $_role;
+    protected $_role = 0;
     /**
      * The class constructor
      * 
@@ -299,11 +299,7 @@ class User_Model_User
     }
 
 	/**
-<<<<<<< .mine
      * @param string $_lastLogin
-=======
-     * @param datetime $_lastLogin
->>>>>>> .r152
      */
     public function setLastLogin ($_lastLogin)
     {

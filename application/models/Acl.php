@@ -34,8 +34,8 @@ class Application_Model_Acl extends Zend_Acl
 	
 	protected static $_user;
 	
-	public static function setUser(User_Model_User $user = null){
-		if(null === $user){
+	public static function setUser(User_Model_User $user){
+		if($user->getId() == 0){
 			throw new InvalidArgumentException("$user is null");
 		}
 		self::$_user = $user;

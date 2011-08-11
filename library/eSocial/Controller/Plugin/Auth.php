@@ -14,7 +14,7 @@ class eSocial_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract
 		if($this->_identity->getRole() != 0){
 			$role = $this->_identity->getRole();
 		}else{
-			$role = null;
+			$role = 'guest';
 		}
 		
 		$module = $request->getModuleName();
