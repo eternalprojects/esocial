@@ -19,8 +19,8 @@ class eSocial_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract
     			$date = new Zend_Date();
     			$user->setLastLogin($date->toString('YYY-MM-dd HH:mm:ss'));
     			//$mapper->save($user);
-    		}*/
-    		eSocial_Smapp::setCurrentUser($user);
+    		}
+    		eSocial_Smapp::setCurrentUser($user);*/
     	}
 	    $acl = Application_Model_Acl::getInstance();
     	Zend_View_Helper_Navigation_HelperAbstract::setDefaultAcl($acl);
