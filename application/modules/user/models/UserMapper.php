@@ -210,7 +210,6 @@ class User_Model_UserMapper
     		$table = $this->getDbTable();
         $select = $table->select()->where('username = ?', $username)->where('password = ?', md5($password))->limit(1);
         if($row = $table->fetchRow($select)){
-        	var_dump($row);
         		if($row->active != 1){
         			Throw new Exception('Account not activated');
         		}

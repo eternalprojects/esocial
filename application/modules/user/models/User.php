@@ -92,7 +92,7 @@ class User_Model_User
      * 
      * @var string
      */
-    protected $_role = 0;
+    protected $_role = 'guest';
     /**
      * The class constructor
      * 
