@@ -123,7 +123,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     		Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole(eSocial_Smapp::getCurrentUser()->getRole());
     		Zend_Registry::set('acl', $acl);
     		return $acl;
-    } */
-
+    } 
+*/
 }
 
