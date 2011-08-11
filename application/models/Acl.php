@@ -24,7 +24,7 @@ class Application_Model_Acl extends Zend_Acl
 			->add(new Zend_Acl_Resource('default.error'), 'default');
 		$this->deny('guest');	
 		$this->allow('guest', 'user.register');
-		$this->allow('guest', 'user.auth', array('login'));
+		$this->allow('guest', 'user.auth', array('login','logout'));
 		$this->deny('user', 'user.register');
 		$this->allow('user', 'user.auth', array('logout'));
 		$this->deny('user', 'user.auth', array('login'));
