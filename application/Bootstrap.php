@@ -48,7 +48,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         Zend_Registry::set('config', $config);
         
         $fc = Zend_Controller_Front::getInstance();
-        //$fc->registerPlugin(new eSocial_Controller_Plugin_Auth());
+        $fc->registerPlugin(new eSocial_Controller_Plugin_Auth());
         return $config;
     }
     protected final function _initAutoload ()

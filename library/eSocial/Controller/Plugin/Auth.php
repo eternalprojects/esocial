@@ -18,7 +18,7 @@ class eSocial_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract
     		if((time() - $userLastAccess) > 300){
     			$date = new Zend_Date();
     			$user->setLastLogin($date->toString('YYY-MM-dd HH:mm:ss'));
-    			//$mapper->save($user);
+    			$mapper->save($user);
     		}
     		eSocial_Smapp::setCurrentUser($user);
     	}
