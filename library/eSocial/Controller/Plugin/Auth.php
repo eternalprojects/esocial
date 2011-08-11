@@ -14,12 +14,12 @@ class eSocial_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract
     		$user = new User_Model_User();
     		$id = $auth->getStorage()->read();
     		$user = $mapper->find($id['id'], $user);
-    		$userLastAccess = $user->getLastLogin();
+    		/*$userLastAccess = $user->getLastLogin();
     		if((time() - $userLastAccess) > 300){
     			$date = new Zend_Date();
     			$user->setLastLogin($date->toString('YYY-MM-dd HH:mm:ss'));
     			//$mapper->save($user);
-    		}
+    		}*/
     		eSocial_Smapp::setCurrentUser($user);
     	}
 	    $acl = Application_Model_Acl::getInstance();
