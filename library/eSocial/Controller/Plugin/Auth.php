@@ -8,7 +8,22 @@ class eSocial_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract
 	private $_noUser = '/login';
 	
 	public function preDispatch(Zend_Controller_Request_Abstract $request){
-		$this->_identity = eSocial_Smapp::getCurrentUser();
+	    $auth = Zend_Auth::getInstance();
+    	if($auth->hasIdentity()){
+    		$mapper = new User_Model_UserMapper();
+    		$user = new User_Model_User();
+    		$id = $auth->getStorage()->read();
+    		$user = $mapper->find($id, $user);
+    		$userLastAccess = $user->getLastLogin();
+    		if((time() - $userLastAccess) > 300){
+    			$date = new Zend_Date();
+    			$user->setLastLogin($date->toString('YYY-MM-dd HH:mm:ss'));
+    			$mapper->save($user);
+    		}
+    		eSocial_Smapp::setCurrentUser($user);
+    	}
+	    
+	    $this->_identity = eSocial_Smapp::getCurrentUser();
 		$this->_acl = Application_Model_Acl::getInstance();
 		
 		$role = $this->_identity->getRole();
