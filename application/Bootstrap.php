@@ -98,7 +98,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $router->addConfig($routes, 'routes');
         $front->setRouter($router);
     }
-    
+    /**
     protected function _initUser(){
     		$auth = Zend_Auth::getInstance();
     		if($auth->hasIdentity()){
@@ -123,7 +123,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     		Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole(eSocial_Smapp::getCurrentUser()->getRole());
     		Zend_Registry::set('acl', $acl);
     		return $acl;
-    }
+    } */
 
 }
 
