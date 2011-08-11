@@ -22,11 +22,11 @@ class eSocial_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract
     		}
     		eSocial_Smapp::setCurrentUser($user);
     	}
-	    $acl = Application_Model_Acl::getInstance();
+	 /*   $acl = Application_Model_Acl::getInstance();
     	Zend_View_Helper_Navigation_HelperAbstract::setDefaultAcl($acl);
     	Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole(eSocial_Smapp::getCurrentUser()->getRole());
     	Zend_Registry::set('acl', $acl);
-    	
+    	*/
 	    $this->_identity = eSocial_Smapp::getCurrentUser();
 		$this->_acl = Application_Model_Acl::getInstance();
 		
