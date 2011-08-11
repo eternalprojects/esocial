@@ -25,6 +25,7 @@
  * @version    0.2
  */
 require_once(APPLICATION_PATH .'/modules/user/models/User.php');
+require_once(APPLICATION_PATH .'/modules/user/models/UserMapper.php');
 /**
  * The Application Bootstrap class
  * 
