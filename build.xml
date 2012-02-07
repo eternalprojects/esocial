@@ -1,62 +1,142 @@
-<project name="Eternally Social" default="build">
-<taskdef resource="cloverlib.xml" classpath="/opt/clover/lib/clover.jar"/>
-    <target name="clean">
-        <delete dir="${basedir}/build" />
-    </target>
- 
-    <target name="prepare">
-        <mkdir dir="${basedir}/build/logs" />
-        <mkdir dir="${basedir}/build/codebrowser" />
-        <mkdir dir="${basedir}/build/coverage" />
-        <mkdir dir="${basedir}/build/dependencies" />
-	<mkdir dir="${basedir}/clover" />
-    </target>
-<target name="clover.fullclean">
-    </target> 
-    <target name="phpcs">
-        <exec dir="${basedir}" executable="phpcs" failonerror="false" output="/dev/null">
-            <arg line="--extensions=php --ignore=build/*,tests/*,library/Zend/* --standard=Zend --tab-width=4 --report=checkstyle --report-file=${basedir}/build/logs/checkstyle.xml ." />
-        </exec>
-    </target>
- 
-    <target name="pdepend">
-        <exec dir="${basedir}" executable="pdepend" failonerror="false">
-            <arg line="--jdepend-xml=${basedir}/build/logs/jdepend.xml
-                       --jdepend-chart=${basedir}/build/dependencies/jdepend.svg
-                       --overview-pyramid=${basedir}/build/dependencies/pyramid.svg
-                       --ignore=build,tests,library/Zend
-                       ." />
-        </exec>
-        <exec dir="${basedir}/build/dependencies" executable="cp" failonerror="false">
-           
-        </exec>
-    </target>
- 
-    <target name="phpcb">
-        <exec dir="${basedir}" executable="phpcb" failonerror="false">
-            <arg line="-e build,library/Zend,tests --log ${basedir}/build/logs --source ${basedir} --output ${basedir}/build/codebrowser" />
-        </exec>
-    </target>
- 
-    <target name="phpunit">
-        <exec dir="${basedir}" executable="phpunit" failonerror="true">
-            <arg line="--bootstrap ${basedir}/tests/bootstrap.php --log-junit ${basedir}/build/logs/phpunit.xml --coverage-clover ${basedir}/clover/clover.xml --coverage-html ${basedir}/build/coverage tests" />
-        </exec>
-    </target>
- 
-    <target name="documentation" depends="prepare">
-        <exec dir="${basedir}" executable="docblox" failonerror="false">
-            <arg line="run -t ${basedir}/build/docblox" />
-        </exec>
-    </target>
- 
-    <target name="parallel">
-        <parallel>
-            <antcall target="phpcs" />
-            <antcall target="pdepend" />
-        </parallel>
-    </target>
- 
-    <target name="build" depends="clean,prepare,parallel,phpunit,phpcb,documentation" />
-</project>
+<?xml version="1.0" encoding="UTF-8"?>
 
+<project name="EternallySocial" default="build">
+ <target name="build"
+    depends="prepare,lint,phploc,pdepend,phpmd-ci,phpcs-ci,phpcpd,phpunit,phpcb"/>
+
+ <target name="build-parallel"
+    depends="prepare,lint,tools-parallel,phpunit,phpcb"/>
+
+ <target name="tools-parallel"
+          description="Run tools in parallel">
+            <parallel threadCount="2">
+               <sequential>
+                   <antcall target="pdepend"/>
+                       <antcall target="phpmd-ci"/>
+                          </sequential>
+                             <antcall target="phpcpd"/>
+                                <antcall target="phpcs-ci"/>
+                                   <antcall target="phploc"/>
+                                      
+                                        </parallel>
+                                         </target>
+
+ <target name="clean" description="Cleanup build artifacts">
+   <delete dir="${basedir}/build/api"/>
+     <delete dir="${basedir}/build/code-browser"/>
+       <delete dir="${basedir}/build/coverage"/>
+         <delete dir="${basedir}/build/logs"/>
+           <delete dir="${basedir}/build/pdepend"/>
+            </target>
+
+ <target name="prepare" depends="clean"
+          description="Prepare for build">
+            <mkdir dir="${basedir}/build/api"/>
+              <mkdir dir="${basedir}/build/code-browser"/>
+                <mkdir dir="${basedir}/build/coverage"/>
+                  <mkdir dir="${basedir}/build/logs"/>
+                    <mkdir dir="${basedir}/build/pdepend"/>
+                      <mkdir dir="${basedir}/build/phpdox"/>
+                       </target>
+
+ <target name="lint">
+   <apply executable="php" failonerror="true">
+      <arg value="-l" />
+
+   <fileset dir="${basedir}/workspace/trunk/application">
+       <include name="**/*.php" />
+           <modified />
+              </fileset>
+
+   <fileset dir="${basedir}/tests">
+       <include name="**/*.php" />
+           <modified />
+              </fileset>
+                </apply>
+                 </target>
+
+ <target name="phploc" description="Measure project size using PHPLOC">
+   <exec executable="phploc">
+      <arg value="--log-csv" />
+         <arg value="${basedir}/build/logs/phploc.csv" />
+            <arg path="${basedir}/workspace/trunk" />
+              </exec>
+               </target>
+
+ <target name="pdepend"
+          description="Calculate software metrics using PHP_Depend">
+            <exec executable="pdepend">
+               <arg value="--jdepend-xml=${basedir}/build/logs/jdepend.xml" />
+                  <arg value="--jdepend-chart=${basedir}/build/pdepend/dependencies.svg" />
+                     <arg value="--overview-pyramid=${basedir}/build/pdepend/overview-pyramid.svg" />
+                        <arg path="${basedir}/workspace/trunk/application" />
+                          </exec>
+                           </target>
+
+ <target name="phpmd"
+          description="Perform project mess detection using PHPMD and print human readable output. Intended for usage on the command line before committing.">
+            <exec executable="phpmd">
+               <arg path="${basedir}/workspace/trunk/application" />
+                  <arg value="text" />
+                     <arg value="${basedir}/build/phpmd.xml" />
+                       </exec>
+                        </target>
+
+ <target name="phpmd-ci"
+          description="Perform project mess detection using PHPMD creating a log file for the continuous integration server">
+            <exec executable="phpmd">
+               <arg path="${basedir}/workspace/trunk/application" />
+                  <arg value="xml" />
+                     <arg value="${basedir}/build/phpmd.xml" />
+                        <arg value="--reportfile" />
+                           <arg value="${basedir}/build/logs/pmd.xml" />
+                             </exec>
+                              </target>
+
+ <target name="phpcs"
+          description="Find coding standard violations using PHP_CodeSniffer and print human readable output. Intended for usage on the command line before committing.">
+            <exec executable="phpcs">
+               <arg value="--standard=zend ${basedir}/build/phpcs.xml" />
+                  <arg path="${basedir}/workspace/trunk/application" />
+                    </exec>
+                     </target>
+
+ <target name="phpcs-ci"
+          description="Find coding standard violations using PHP_CodeSniffer creating a log file for the continuous integration server">
+            <exec executable="phpcs" output="/dev/null">
+               <arg value="--report=checkstyle" />
+                  <arg value="--report-file=${basedir}/build/logs/checkstyle.xml" />
+                     <arg value="--standard=${basedir}/build/phpcs.xml" />
+                        <arg path="${basedir}/workspace/trunk/application" />
+                          </exec>
+                           </target>
+
+ <target name="phpcpd" description="Find duplicate code using PHPCPD">
+   <exec executable="phpcpd">
+      <arg value="--log-pmd" />
+         <arg value="${basedir}/build/logs/pmd-cpd.xml" />
+            <arg path="${basedir}/workspace/trunk/application" />
+              </exec>
+               </target>
+
+ <target name="phpdox"
+          description="Generate API documentation using phpDox">
+            <exec executable="phpdox"/>
+             </target>
+
+ <target name="phpunit" description="Run unit tests with PHPUnit">
+   <exec executable="phpunit" failonerror="true"/>
+    </target>
+
+ <target name="phpcb"
+          description="Aggregate tool output with PHP_CodeBrowser">
+            <exec executable="phpcb">
+               <arg value="--log" />
+                  <arg path="${basedir}/build/logs" />
+                     <arg value="--source" />
+                        <arg path="${basedir}/workspace/trunk/tests" />
+                           <arg value="--output" />
+                              <arg path="${basedir}/build/code-browser" />
+                                </exec>
+                                 </target>
+                                 </project>
