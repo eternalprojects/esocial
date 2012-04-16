@@ -34,7 +34,8 @@
 class User_AuthController extends Zend_Controller_Action
 {
 	public function indexAction(){
-		$this->_redirect('/');
+		$this->_redirector->gotoSimple('index','index','default');
+		return;
 	}
 	
 	public function loginAction(){

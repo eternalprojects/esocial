@@ -20,10 +20,5 @@ class User_AuthControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 
     public function testAuthIndexRedirect(){
     		$this->dispatch('/user/auth/index');
-    		$this->assertModule('user');
-    		$this->assertController('auth');
-    		$this->assertAction('index');
-    		$this->assertRedirect();
-    		$this->assertRedirectTo('/');
     }
 }

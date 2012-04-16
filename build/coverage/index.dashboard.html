@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="jquery.min.js" type="text/javascript"></script>
+    <script src="highcharts.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+          var classCoverageDistribution = new Highcharts.Chart({
+             chart: {
+                renderTo: 'classCoverageDistribution',
+                type: 'column'
+             },
+             title: {text: ''},
+             legend: {enabled: false},
+             credits: {enabled: false},
+             tooltip: {enabled: false},
+             xAxis: {
+                 labels: {style: {fontSize: '8px'}},
+                 categories: [
+                 '0%','0-10%','10-20%','20-30%','30-40%','40-50%','50-60%','60-70%','70-80%','80-90%','90-100%','100%'
+                 ]
+            },
+            yAxis: {
+                title: '',
+                labels: {style: {fontSize: '8px'}},
+            },
+            series: [{
+                data: [2,0,0,0,0,0,0,0,3,1,1,3]
+            }],
+          });
+
+        var classComplexity = new Highcharts.Chart({
+            chart: {
+              renderTo: 'classComplexity',
+              type: 'scatter'
+            },
+            title: {text: ''},
+            legend: {enabled: false},
+            credits: {enabled: false},
+            xAxis: {
+               labels: {enabled: false},
+            },
+            yAxis: {
+              title: '',
+              labels: {enabled: false},
+            },
+            tooltip: {
+                formatter: function() {
+                    return this.point.config[2];
+                }
+            },
+            series: [{
+              data: [[100,2,"<a href=\"controllers_IndexController.php.html#3\">IndexController<\/a>"],[75.862068965517,6,"<a href=\"models_Acl.php.html#3\">Application_Model_Acl<\/a>"],[100,0,"<a href=\"modules_user_Bootstrap.php.html#34\">User_Bootstrap<\/a>"],[0,7,"<a href=\"modules_user_controllers_AuthController.php.html#34\">User_AuthController<\/a>"],[93.478260869565,11,"<a href=\"modules_user_controllers_RegisterController.php.html#34\">User_RegisterController<\/a>"],[100,0,"<a href=\"modules_user_models_DbTable_User.php.html#34\">User_Model_DbTable_User<\/a>"],[0,1,"<a href=\"modules_user_models_Mailer.php.html#37\">User_Model_Mailer<\/a>"],[82.352941176471,31,"<a href=\"modules_user_models_User.php.html#34\">User_Model_User<\/a>"],[78.494623655914,19,"<a href=\"modules_user_models_UserMapper.php.html#35\">User_Model_UserMapper<\/a>"],[73.333333333333,6,"<a href=\"views_helpers_LoggedInAs.php.html#13\">Zend_View_Helper_LoggedInAs<\/a>"]],
+              marker: {
+                  symbol: 'diamond'
+              }
+            }],
+        });
+    });
+    </script>
+  </head>
+
+  <body>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr><td class="title"></td></tr>
+      <tr><td><div align="center"><p><a href="index.html">Back to Code Coverage report</a></p></div></td></tr>
+      <tr><td class="ruler"><img src="glass.png" width="3" height="3" alt=""></td></tr>
+    </table>
+
+    <br />
+
+    <center>
+      <table width="90%" cellpadding="2" cellspacing="1" border="0">
+        <tr>
+          <td valign="top">
+            <h2>Class Coverage Distribution</h2>
+            <div id="classCoverageDistribution"></div>
+          </td>
+
+          <td valign="top">
+            <h2>Class Complexity</h2>
+            <div id="classComplexity"></div>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">
+            <h2>Top Project Risks</h2>
+            <ul>
+              <li><a href="modules_user_controllers_AuthController.php.html#34">User_AuthController</a> (56)</li>
+              <li><a href="modules_user_models_User.php.html#34">User_Model_User</a> (36)</li>
+              <li><a href="modules_user_models_UserMapper.php.html#35">User_Model_UserMapper</a> (22)</li>
+              <li><a href="modules_user_controllers_RegisterController.php.html#34">User_RegisterController</a> (11)</li>
+              <li><a href="views_helpers_LoggedInAs.php.html#13">Zend_View_Helper_LoggedInAs</a> (6)</li>
+              <li><a href="models_Acl.php.html#3">Application_Model_Acl</a> (6)</li>
+
+            </ul>
+          </td>
+
+          <td valign="top">
+            <h2>Least Tested Methods</h2>
+            <ul>
+              <li><a href="models_Acl.php.html#37">Application_Model_Acl::setUser</a> (0%)</li>
+              <li><a href="modules_user_models_Mailer.php.html#48">User_Model_Mailer::sendRegistrationConfirmation</a> (0%)</li>
+              <li><a href="modules_user_models_User.php.html#116">User_Model_User::__set</a> (0%)</li>
+              <li><a href="modules_user_models_UserMapper.php.html#209">User_Model_UserMapper::login</a> (0%)</li>
+              <li><a href="modules_user_controllers_AuthController.php.html#91">User_AuthController::logoutAction</a> (0%)</li>
+              <li><a href="models_Acl.php.html#51">Application_Model_Acl::resetInstance</a> (0%)</li>
+              <li><a href="modules_user_controllers_AuthController.php.html#36">User_AuthController::indexAction</a> (0%)</li>
+              <li><a href="modules_user_controllers_AuthController.php.html#40">User_AuthController::loginAction</a> (0%)</li>
+              <li><a href="modules_user_models_User.php.html#131">User_Model_User::__get</a> (0%)</li>
+              <li><a href="views_helpers_LoggedInAs.php.html#22">Zend_View_Helper_LoggedInAs::loggedInAs</a> (69%)</li>
+
+            </ul>
+          </td>
+        </tr>
+      </table>
+    </center>
+
+    <br />
+
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr><td class="ruler"><img src="glass.png" width="3" height="3" alt=""></td></tr>
+      <tr><td class="versionInfo">Generated by <a href="http://github.com/sebastianbergmann/php-code-coverage" target="_top">PHP_CodeCoverage 1.1.2</a> using <a href="http://www.php.net/" target="_top">PHP 5.4.0-3~precise+4</a> and PHPUnit 3.6.10 at Mon Apr 16 3:34:20 UTC 2012.</td></tr>
+    </table>
+
+    <br/>
+  </body>
+</html>

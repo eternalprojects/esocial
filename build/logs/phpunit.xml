@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="Eternally Social Tests" tests="10" assertions="61" failures="1" errors="0" time="1.677055">
+    <testsuite name="IndexControllerTest" file="/var/atlassian/application-data/bamboo/xml-data/build-dir/ESOCIAL-UNITTEST-JOB1/tests/application/controllers/IndexControllerTest.php" tests="1" assertions="3" failures="0" errors="0" time="0.081856">
+      <testcase name="testIndexAction" class="IndexControllerTest" file="/var/atlassian/application-data/bamboo/xml-data/build-dir/ESOCIAL-UNITTEST-JOB1/tests/application/controllers/IndexControllerTest.php" line="12" assertions="3" time="0.081856"/>
+    </testsuite>
+    <testsuite name="User_AuthControllerTest" file="/var/atlassian/application-data/bamboo/xml-data/build-dir/ESOCIAL-UNITTEST-JOB1/tests/application/modules/user/controllers/AuthControllerTest.php" fullPackage="User" tests="1" assertions="1" failures="1" errors="0" time="0.038061">
+      <testcase name="testAuthIndexRedirect" class="User_AuthControllerTest" file="/var/atlassian/application-data/bamboo/xml-data/build-dir/ESOCIAL-UNITTEST-JOB1/tests/application/modules/user/controllers/AuthControllerTest.php" line="21" assertions="1" time="0.038061">
+        <failure type="Zend_Test_PHPUnit_Constraint_Exception">User_AuthControllerTest::testAuthIndexRedirect
+/index/index
+Failed asserting response is a redirect
+
+/var/atlassian/application-data/bamboo/xml-data/build-dir/ESOCIAL-UNITTEST-JOB1/library/Zend/Test/PHPUnit/Constraint/Redirect.php:190
+/var/atlassian/application-data/bamboo/xml-data/build-dir/ESOCIAL-UNITTEST-JOB1/library/Zend/Test/PHPUnit/ControllerTestCase.php:696
+/var/atlassian/application-data/bamboo/xml-data/build-dir/ESOCIAL-UNITTEST-JOB1/tests/application/modules/user/controllers/AuthControllerTest.php:23
+/usr/bin/phpunit:46
+</failure>
+      </testcase>
+    </testsuite>
+    <testsuite name="User_RegisterControllerTest" file="/var/atlassian/application-data/bamboo/xml-data/build-dir/ESOCIAL-UNITTEST-JOB1/tests/application/modules/user/controllers/RegisterControllerTest.php" fullPackage="User" tests="8" assertions="57" failures="0" errors="0" time="1.557138">
+      <testcase name="testFormGeneration" class="User_RegisterControllerTest" file="/var/atlassian/application-data/bamboo/xml-data/build-dir/ESOCIAL-UNITTEST-JOB1/tests/application/modules/user/controllers/RegisterControllerTest.php" line="22" assertions="5" time="0.148344"/>
+      <testcase name="testFormError" class="User_RegisterControllerTest" file="/var/atlassian/application-data/bamboo/xml-data/build-dir/ESOCIAL-UNITTEST-JOB1/tests/application/modules/user/controllers/RegisterControllerTest.php" line="35" assertions="8" time="0.161248"/>
+      <testcase name="testSuccessfulRegister" class="User_RegisterControllerTest" file="/var/atlassian/application-data/bamboo/xml-data/build-dir/ESOCIAL-UNITTEST-JOB1/tests/application/modules/user/controllers/RegisterControllerTest.php" line="49" assertions="10" time="0.293514"/>
+      <testcase name="testSuccessAction" class="User_RegisterControllerTest" file="/var/atlassian/application-data/bamboo/xml-data/build-dir/ESOCIAL-UNITTEST-JOB1/tests/application/modules/user/controllers/RegisterControllerTest.php" line="83" assertions="5" time="0.042578"/>
+      <testcase name="testDuplicateUsername" class="User_RegisterControllerTest" file="/var/atlassian/application-data/bamboo/xml-data/build-dir/ESOCIAL-UNITTEST-JOB1/tests/application/modules/user/controllers/RegisterControllerTest.php" line="93" assertions="8" time="0.306860"/>
+      <testcase name="testDuplicateEmail" class="User_RegisterControllerTest" file="/var/atlassian/application-data/bamboo/xml-data/build-dir/ESOCIAL-UNITTEST-JOB1/tests/application/modules/user/controllers/RegisterControllerTest.php" line="121" assertions="8" time="0.312780"/>
+      <testcase name="testActivationSuccess" class="User_RegisterControllerTest" file="/var/atlassian/application-data/bamboo/xml-data/build-dir/ESOCIAL-UNITTEST-JOB1/tests/application/modules/user/controllers/RegisterControllerTest.php" line="149" assertions="7" time="0.240165"/>
+      <testcase name="testActivateSuccess" class="User_RegisterControllerTest" file="/var/atlassian/application-data/bamboo/xml-data/build-dir/ESOCIAL-UNITTEST-JOB1/tests/application/modules/user/controllers/RegisterControllerTest.php" line="167" assertions="6" time="0.051649"/>
+    </testsuite>
+  </testsuite>
+</testsuites>
