@@ -26,7 +26,7 @@
  
     <target name="phpmd">
         <exec dir="${basedir}" executable="phpmd" failonerror="false">
-            <arg line=". xml codesize --reportfile ${basedir}/build/logs/pmd.xml" />
+            <arg line=". xml codesize --exclude=build,tests,library/Zend --reportfile ${basedir}/build/logs/pmd.xml" />
         </exec>
     </target>
  
@@ -35,6 +35,7 @@
             <arg line="--log-pmd=${basedir}/build/logs/pmd-cpd.xml
                        --exclude=build
                        --exclude=tests
+                       --exclude=library/Zend
                        ." />
         </exec>
         <exec dir="${basedir}/build/logs" executable="xsltproc" failonerror="false" output="${basedir}/build/cpd/index.html">
