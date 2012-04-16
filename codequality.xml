@@ -20,13 +20,16 @@
 
 	<target name="phpcs">
         <exec dir="${basedir}" executable="phpcs" failonerror="false" output="/dev/null">
-            <arg line="--extensions=php --ignore=build/*,tests/* --standard=Zend --tab-width=4 --report=checkstyle --report-file=${basedir}/build/logs/checkstyle.xml ." />
+            <arg line="--extensions=php --ignore=build/*,tests/*,library/Zend/* --standard=Zend --tab-width=4 --report=checkstyle --report-file=${basedir}/build/logs/checkstyle.xml ." />
         </exec>
     </target>
  
     <target name="phpmd">
         <exec dir="${basedir}" executable="phpmd" failonerror="false">
             <arg line=". xml codesize --exclude=build,tests,library/Zend --reportfile ${basedir}/build/logs/pmd.xml" />
+        </exec>
+        <exec dir="${basedir}/build/logs" executable="xsltproc" failonerror="false">
+            
         </exec>
     </target>
  
@@ -49,7 +52,7 @@
                        --jdepend-chart=${basedir}/build/dependencies/jdepend.svg
                        --overview-pyramid=${basedir}/build/dependencies/pyramid.svg
                        --optimization=best
-                       --exclude=build,tests
+                       --exclude=build,tests,library/Zend
                        ." />
         </exec>
         
