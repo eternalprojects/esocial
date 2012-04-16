@@ -8,6 +8,8 @@
 		<mkdir dir="${basedir}/build/logs" />
 		<mkdir dir="${basedir}/build/coverage" />
 		<mkdir dir="${basedir}/build/codebrowser" />
+                <mkdir dir="${basedir}/build/cpd" />
+                <mkdir dir="${basedir}/build/dependencies" />
 	</target>
 
 	<target name="lint">
