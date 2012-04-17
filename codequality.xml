@@ -32,6 +32,7 @@
         </exec>
         <exec dir="${basedir}" executable="xsltproc" failonerror="false" output="${basedir}/build/pmd/index.html">
             <arg line="/root/pmd-report.xslt ${basedir}/build/logs/pmd.xml" />
+        </exec>
     </target>
  
     <target name="phpcpd">
