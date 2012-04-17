@@ -75,7 +75,7 @@
  
    <target name="documentation" depends="prepare">
         <exec dir="${basedir}" executable="docblox" failonerror="false">
-            <arg line="run -t ${basedir}/build/docs -i build,tests,library/Zend" />
+            <arg line="run -i build/*,tests/*,library/Zend/* -e php -d ${basedir}/ -t ${basedir}/build/docs" />
         </exec>
     </target>
  
