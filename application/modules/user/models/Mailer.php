@@ -99,21 +99,16 @@ class User_Model_Mailer
         nd change your password.</p>
         <p>Username: " . $user->getUsername() . "</p>
         <p>This is an automated message.  Please Do Not Reply to this email.  If you require assistance, please contact
-        us at " . Zend_Registry::get('config')->site->support . "
+        us at " . Zend_Registry::get('config')->site->support . "</p>"
         );
 
-
         // Create a Text version of the message body
-        $mail->setBodyText(
-            "Thank you for registering at " . Zend_Registry::get('config')->site->name . " .
-        To {login
-} in to your new account, we just need you to verify your email address and activate your account,
+        $mail->setBodyText("Thank you for registering at  " . Zend_Registry::get('config')->site->name . " To login to your new account, we just need you to verify your email address and activate your account,
 		which can be done my clicking on the link below:
 		" . Zend_Registry::get('config')->site->url . " / activate / " . $user->getId() . "
             / " . md5($user->getEmail()) . "
-		  Please do {not
-} reply to this email, as it is an automated response .  If you have any questions and/or issues, please visit
-		" . Zend_Registry::get('config')->site->url . " / support"
+		  Please do not reply to this email, as it is an automated response .  If you have any questions and/or issues, please email "
+            . Zend_Registry::get('config')->site->url ."
         );
 
         // Send the email

@@ -38,8 +38,9 @@ class User_RegisterControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 
         $this->getRequest()->setMethod('POST')->setPost(
             array(
-                'fname'=> 'Jesse',
-                'lname'=> 2
+                'fname' => 'Jesse',
+                'lname' => 2,
+                'submit'=> 'Register'
             )
         );
         $this->dispatch('register');
