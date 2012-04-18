@@ -48,7 +48,7 @@ class User_AuthController extends Zend_Controller_Action
         $db    = $this->_getParam('db');
         $forms = new Zend_Config_Ini(APPLICATION_PATH . '/modules/user/forms/register.ini', 'login');
         $form  = new Zend_Form($forms);
-        if (isset($this->getRequest()->getParam('submit')) == 'Register') {
+        if ($this->getRequest()->getParam('submit') == 'Register') {
             if ($form->isValid($_POST)) {
                 $adapter = new Zend_Auth_Adapter_DbTable(
                     $db,
