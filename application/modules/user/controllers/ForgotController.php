@@ -33,5 +33,18 @@
  */
 class User_ForgotController extends Zend_Controller_Action
 {
+    public function indexAction()
+    {
+        return $this->_redirect('/');
+    }
 
+    public function usernameAction()
+    {
+        if ($this->getRequest()->getParam('submit') == 'Get Username')
+    }
+
+    public function passwordAction()
+    {
+
+    }
 }

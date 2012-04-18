@@ -60,7 +60,7 @@ class User_RegisterController extends Zend_Controller_Action
                 if ($bit == 1) {
                     $this->view->form = $form;
                 } else {
-                    $mapper->save($user);
+                    $user->save($user);
                     if (APPLICATION_ENV != 'testing') {
                         User_Model_Mailer::sendRegistrationConfirmation($user);
                     }
@@ -103,11 +103,19 @@ class User_RegisterController extends Zend_Controller_Action
 
     public function notactiveAction()
     {
-
+        $user = new User_Model_User();
+        $user = $user->find((int)$this->_request->getParam('id'));
+        $this -
     }
 
     public function resendAction()
     {
-
+        if ($id = (int)$this->getRequest()->getParam('id')) {
+            $user = new User_Model_User();
+            $user = $user->find($id);
+            User_Model_Mailer::sendRegistrationConfirmation($this);
+            $this->view->email = $user->getEmail();
+        }
     }
+
 }

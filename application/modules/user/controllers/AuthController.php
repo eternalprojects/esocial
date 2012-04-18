@@ -33,10 +33,13 @@
  */
 class User_AuthController extends Zend_Controller_Action
 {
+    /**
+     * @return mixed
+     */
     public function indexAction()
     {
         $this->_redirect('/');
-        return;
+
     }
 
     public function loginAction()
@@ -98,5 +101,20 @@ class User_AuthController extends Zend_Controller_Action
     {
         Zend_Auth::getInstance()->clearIdentity();
         return $this->_redirect('/');
+    }
+
+    public function changepasswordAction()
+    {
+        $user = new User_Model_User();
+        $user = $user->find($this->_request->getParam('id'));
+        if ($this->getRequest()->getParam('submit') == 'Change Password') {
+            $user = new User_Model_User();
+            $user = $user->find($this->_request->getParam('id'));
+            $user->setPassword($this->_request->getParam('password'));
+            $user->save();
+
+        } else {
+            return $this->_redirect('/');
+        }
     }
 }
