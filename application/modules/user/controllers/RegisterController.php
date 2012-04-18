@@ -63,7 +63,7 @@ class User_RegisterController extends Zend_Controller_Action
                     if (APPLICATION_ENV != 'testing') {
                         User_Model_Mailer::sendRegistrationConfirmation($user);
                     }
-                    $this->_redirect('/register/success');
+                    $this->_forward('/register/success');
                 }
             } else {
                 $this->view->form = $form;
@@ -90,7 +90,7 @@ class User_RegisterController extends Zend_Controller_Action
         if ($hash == md5($user->getEmail())) {
             $user->setActive(1);
             $user->save($user);
-            $this->_redirect('/activate/success');
+            $this->_forward('/activate/success');
         } else {
             $this->view->data = "There was an error while activating your account.  Please try again later.";
         }
