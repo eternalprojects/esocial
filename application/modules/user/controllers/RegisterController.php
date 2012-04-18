@@ -41,8 +41,8 @@ class User_RegisterController extends Zend_Controller_Action
         $config = new Zend_Config_Ini(
             APPLICATION_PATH . '/modules/user/forms/register.ini', 'register');
         $form   = new Zend_Form($config->register);
-        if ($this->getRequest()->isPost()) {
-            if ($form->isValid($this->getRequest()->getPost())) {
+        if ($this->getRequest()->getParam('submit') == 'Register') {
+            if ($form->isValid($this->getRequest()->getParams())) {
                 $user = new User_Model_User($form->getValues());
                 $bit  = 0;
                 if ($user->checkUsername() == true) {
@@ -103,9 +103,9 @@ class User_RegisterController extends Zend_Controller_Action
 
     public function notactiveAction()
     {
-        $user = new User_Model_User();
-        $user = $user->find((int)$this->_request->getParam('id'));
-        $this -
+        $user           = new User_Model_User();
+        $user           = $user->find((int)$this->_request->getParam('id'));
+        $this->view->id = $user->getId();
     }
 
     public function resendAction()
