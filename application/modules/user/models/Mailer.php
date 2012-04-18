@@ -108,7 +108,7 @@ class User_Model_Mailer
 		" . Zend_Registry::get('config')->site->url . " / activate / " . $user->getId() . "
             / " . md5($user->getEmail()) . "
 		  Please do not reply to this email, as it is an automated response .  If you have any questions and/or issues, please email "
-            . Zend_Registry::get('config')->site->url ."
+            . Zend_Registry::get('config')->site->url ."."
         );
 
         // Send the email
