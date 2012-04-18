@@ -40,7 +40,9 @@ class User_ForgotController extends Zend_Controller_Action
 
     public function usernameAction()
     {
-        if ($this->getRequest()->getParam('submit') == 'Get Username')
+        if ($this->getRequest()->getParam('submit') == 'Get Username') {
+
+        }
     }
 
     public function passwordAction()

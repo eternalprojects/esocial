@@ -46,11 +46,10 @@ class User_RegisterController extends Zend_Controller_Action
                 $user = new User_Model_User($form->getValues());
                 $bit  = 0;
                 if ($user->checkUsername() == true) {
-                    $form->getElement('username')->addError(
-                        'The username you provided is already in use'
-                    );
+                    $form->getElement('username')->addError('The username you provided is already in use');
                     $bit = 1;
                 }
+
                 if ($user->checkEmail() == true) {
                     $form->getElement('email')->addError(
                         'An account is already registered to the email address you provided'
