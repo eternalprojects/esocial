@@ -3,7 +3,7 @@
  * Eternally Social
  *
  * LICENSE:
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -15,45 +15,46 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program. If not, see . 
+ * along with this program. If not, see .
  *
- * @category   User
- * @package    Registration
- * @copyright  Copyright (c) 2011 JPL Web Solutions
- * @author	   Jesse P Lesperance <jesse@jplesperance.me>
- * @license    http://www.gnu.org/licenses/gpl.html GNU General Public License 
- * @version    0.2
+ * @category     User
+ * @package      Registration
+ * @copyright    Copyright (c) 2011 JPL Web Solutions
+ * @author       Jesse P Lesperance <jesse@jplesperance.me>
+ * @license      http://www.gnu.org/licenses/gpl.html GNU General Public License
+ * @version      0.2
  */
 /**
  * The Registration Controller
- * 
+ *
  * @author Jesse P Lesperance <jesse@jplesperance.me>
- * @since 0.2
- * @uses Zend_Controller_Action
+ * @since  0.2
+ * @uses   Zend_Controller_Action
  */
 class User_RegisterController extends Zend_Controller_Action
 {
     /**
      * The default action - show the hregistration form
      */
-    public function indexAction ()
+    public function indexAction()
     {
         $config = new Zend_Config_Ini(
-        APPLICATION_PATH . '/modules/user/forms/register.ini', 'register');
-        $form = new Zend_Form($config->register);
+            APPLICATION_PATH . '/modules/user/forms/register.ini', 'register');
+        $form   = new Zend_Form($config->register);
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($this->getRequest()->getPost())) {
                 $user = new User_Model_User($form->getValues());
-                $mapper = new User_Model_UserMapper();
-                $bit = 0;
-                if ($mapper->checkUsername($user) == true) {
+                $bit  = 0;
+                if ($user->checkUsername() == true) {
                     $form->getElement('username')->addError(
-                    'The username you provided is already in use');
+                        'The username you provided is already in use'
+                    );
                     $bit = 1;
                 }
-                if ($mapper->checkEmail($user) == true) {
+                if ($user->checkEmail() == true) {
                     $form->getElement('email')->addError(
-                    'An account is already registered to the email address you provided');
+                        'An account is already registered to the email address you provided'
+                    );
                     $bit = 1;
                 }
                 if ($bit == 1) {
@@ -72,28 +73,41 @@ class User_RegisterController extends Zend_Controller_Action
             $this->view->form = $form;
         }
     }
+
     /**
      * Display a message stating account registration was successful
      */
-    public function successAction ()
+    public function successAction()
     {
         $this->view->data = "Great Job";
     }
-    public function activateAction ()
+
+    public function activateAction()
     {
-        $id = $this->_request->getParam('id');
+        $id   = $this->_request->getParam('id');
         $hash = $this->_request->getParam('code');
-        $mapper = new User_Model_UserMapper();
         $user = new User_Model_User();
-        $user = $mapper->find($id, $user);
+        $user = $user->find($id);
         if ($hash == md5($user->getEmail())) {
             $user->setActive(1);
-            $mapper->save($user);
+            $user->save($user);
             $this->_redirect('/activate/success');
         } else {
             $this->view->data = "There was an error while activating your account.  Please try again later.";
         }
     }
-    public function activatedAction ()
-    {}
+
+    public function activatedAction()
+    {
+    }
+
+    public function notactiveAction()
+    {
+
+    }
+
+    public function resendAction()
+    {
+
+    }
 }
