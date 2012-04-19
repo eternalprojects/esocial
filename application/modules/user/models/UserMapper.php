@@ -2,27 +2,23 @@
 /**
  * Eternally Social
  *
- * LICENSE:
+ * LICENSE
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://jplwebsolutions.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license
+ * @jplwebsolutions.com so we can send you a copy immediately.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program. If not, see .
- *
- * @category     User
- * @package      Registration
- * @copyright    Copyright (c) 2011 JPL Web Solutions
- * @author       Jesse P Lesperance <jesse@jplesperance.me>
- * @license      http://www.gnu.org/licenses/gpl.html GNU General Public License
- * @version      0.2
+ * @category       User
+ * @package        Registration
+ * @copyright      Copyright (c) 2011-2012 JPL Web Solutions <http://jplwebsolutions.com>
+ * @author         Jesse P Lesperance <jesse@jplesperance.me>
+ * @license        hhttp://jplwebsolutions.com/license/new-bsd  New BSD License
+ * @version        0.2
  */
 require_once(APPLICATION_PATH . '/modules/user/models/DbTable/User.php');
 /**
@@ -224,6 +220,30 @@ class User_Model_UserMapper
         } else {
             return false;
         }
+    }
+
+    final public function findByEmail($email, User_Model_User $user)
+    {
+        $table  = $this->getDbTable();
+        $select = $table->select()->where('email = ?', $email);
+        $row    = $table->fetchRow($select);
+        $user->setId($row->id);
+        $user->setUsername($row->username);
+        $user->setPassword($row->password);
+        $user->setEmail($row->email);
+        $user->setFname($row->fname);
+        $user->setLname($row->lname);
+        $user->setDob($row->dob);
+        $user->setactive($row->active);
+        $user->setLastLogin($row->last_login);
+        $user->setRole($row->role);
+        return $user;
+
+    }
+
+    final public function findByEmailUname($email, $username, User_Model_User $user)
+    {
+
     }
 
     /**

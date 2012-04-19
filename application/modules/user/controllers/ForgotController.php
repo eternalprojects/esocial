@@ -33,20 +33,52 @@
  */
 class User_ForgotController extends Zend_Controller_Action
 {
-    public function indexAction()
+    final public function indexAction()
     {
         return $this->_redirect('/');
     }
 
-    public function usernameAction()
+    final public function usernameAction()
     {
         if ($this->getRequest()->getParam('submit') == 'Get Username') {
-
+            $user = new User_Model_User();
+            $user = $user->findByEmail($this->getRequest()->getParam('email'));
+            if ($user->getId() == 0) {
+                $this->_forward('incorrectemail', null, null, array('email'=> $this->getRequest()->getParam('email')));
+                return;
+            }
+            User_Model_Mailer::sendUsername($user);
+            $this->_forward('unamesent', null, null, array('email'=> $user->getEmail()));
+            return;
         }
+
+    }
+
+    public function incorrectemailAction()
+    {
+        $this->view->email = $this->getRequest()->getParam('email');
+    }
+
+    public function unamesentAction()
+    {
+        $this->view->email = $this->getRequest()->getParam('email');
     }
 
     public function passwordAction()
     {
+        if ($this->getRequest()->getParam('submit') == 'Reset') {
+            $user = new User_Model_User();
+            $user = $user->findByEmailUname(
+                $this->getRequest()->getParam('uname'), $this->getRequest()->getParam('email')
+            );
+            if ($user->getId() == 0) {
+                $this->_forward('nouser');
+                exit;
+            }
+            $user->generatePassword();
+            User_Model_Mailer::sendPassword($user);
+            return;
 
+        }
     }
 }

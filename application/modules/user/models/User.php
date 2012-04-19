@@ -398,14 +398,48 @@ class User_Model_User
         return $this->_mapper->checkEmail($this);
     }
 
-    public function retrieveUsername($email)
+    public function findByEmail($email)
     {
-
+        return $this->_mapper->findByEmail($email, $this);
     }
 
-    public function retrievePassword($username, $email)
+    public function findByEmailUname($username, $email)
     {
+        return $this->_mapper->findByEmailUname($email, $username, $this);
+    }
 
+    function generatePassword($length = 9, $strength = 4)
+    {
+        $vowels     = 'aeuy';
+        $consonants = 'bdghjmnpqrstvz';
+        if ($strength & 1) {
+            $consonants .= 'BDGHJLMNPQRSTVWXZ';
+        }
+        if ($strength & 2) {
+            $vowels .= "AEUY";
+        }
+        if ($strength & 4) {
+            $consonants .= '23456789';
+        }
+        if ($strength & 8) {
+            $consonants .= '@#$%';
+        }
+
+        $password = '';
+        $alt      = time() % 2;
+        for (
+            $i = 0; $i < $length; $i++
+        ) {
+            if ($alt == 1) {
+                $password .= $consonants[(rand() % strlen($consonants))];
+                $alt = 0;
+            } else {
+                $password .= $vowels[(rand() % strlen($vowels))];
+                $alt = 1;
+            }
+        }
+        $this->_password = $password;
+        return;
     }
 
 
