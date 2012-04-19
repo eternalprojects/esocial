@@ -65,7 +65,6 @@ class Application_Model_Acl extends Zend_Acl
         $this->deny('user', 'user.register');
         $this->allow('user', 'user.auth', array('logout'));
         $this->deny('user', 'user.auth', array('login'));
-		$this->allow('user', 'user.forgot', array('username'));
 
         return $this;
     }
