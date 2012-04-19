@@ -64,6 +64,11 @@ class User_ForgotController extends Zend_Controller_Action
         $this->view->email = $this->getRequest()->getParam('email');
     }
 
+    public function nouserAction()
+    {
+
+    }
+
     public function passwordAction()
     {
         if ($this->getRequest()->getParam('submit') == 'Reset') {
@@ -72,7 +77,10 @@ class User_ForgotController extends Zend_Controller_Action
                 $this->getRequest()->getParam('uname'), $this->getRequest()->getParam('email')
             );
             if ($user->getId() == 0) {
-                $this->_forward('nouser');
+                $this->_forward('nouser', null, null, array('email'   => $this->_request->getParam('email'),
+                                                            'username'=> $this->_request->getParam('username')
+                    )
+                );
                 exit;
             }
             $user->generatePassword();

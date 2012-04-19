@@ -11,6 +11,7 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license
+ *
  * @jplwebsolutions.com so we can send you a copy immediately.
  *
  * @category       User
@@ -243,7 +244,20 @@ class User_Model_UserMapper
 
     final public function findByEmailUname($email, $username, User_Model_User $user)
     {
-
+        $table  = $this->getDbTable();
+        $select = $table->select()->where('email = ?', $email)->where('username = ?', $username);
+        $row    = $table->fetchRow($select);
+        $user->setId($row->id);
+        $user->setUsername($row->username);
+        $user->setPassword($row->password);
+        $user->setEmail($row->email);
+        $user->setFname($row->fname);
+        $user->setLname($row->lname);
+        $user->setDob($row->dob);
+        $user->setactive($row->active);
+        $user->setLastLogin($row->last_login);
+        $user->setRole($row->role);
+        return $user;
     }
 
     /**
