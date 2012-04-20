@@ -90,7 +90,7 @@ class User_RegisterControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
             $this->assertEquals(0, $user->getActive());
             $this->assertEquals('0000-00-00 00:00:00', $user->getLastLogin());
             $this->assertEquals('jlswebdev', $user->getUsername());
-            $num = $user->delete($user);
+            $num = $user->delete();
             $this->assertEquals(1, $num);
         }
     }

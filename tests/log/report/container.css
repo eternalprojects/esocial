@@ -6,21 +6,21 @@ version: 2.9.0
 */
 .yui-overlay,
 .yui-panel-container {
-    visibility:hidden;
-    position:absolute;
+    visibility: hidden;
+    position: absolute;
     z-index: 2;
 }
 
 .yui-tt {
-    visibility:hidden;
-    position:absolute;
-    color:#333;
-    background-color:#FDFFB4;
-    font-family:arial,helvetica,verdana,sans-serif;
-    padding:2px;
-    border:1px solid #FCC90D;
-    font:100% sans-serif;
-    width:auto;
+    visibility: hidden;
+    position: absolute;
+    color: #333;
+    background-color: #FDFFB4;
+    font-family: arial, helvetica, verdana, sans-serif;
+    padding: 2px;
+    border: 1px solid #FCC90D;
+    font: 100% sans-serif;
+    width: auto;
 }
 
 /*
@@ -37,31 +37,31 @@ version: 2.9.0
 }
 
 * html body.masked select {
-    visibility:hidden;
+    visibility: hidden;
 }
 
 * html div.yui-panel-container select {
-    visibility:inherit;
+    visibility: inherit;
 }
 
 * html div.drag select {
-    visibility:hidden;
+    visibility: hidden;
 }
 
 * html div.hide-select select {
-    visibility:hidden;
+    visibility: hidden;
 }
 
 .mask {
     z-index: 1;
-    display:none;
-    position:absolute;
-    top:0;
-    left:0;
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
     -moz-opacity: 0.5;
-    opacity:.50;
-    filter: alpha(opacity=50);
-    background-color:#CCC;
+    opacity: .50;
+    filter: alpha(opacity = 50);
+    background-color: #CCC;
 }
 
 /*
@@ -140,7 +140,6 @@ PLEASE NOTE:
 
 }
 
-
 /* Panel underlay styles */
 
 .yui-panel-container .underlay {
@@ -168,7 +167,7 @@ PLEASE NOTE:
     left: 3px;
     background-color: #000;
     opacity: .12;
-    filter: alpha(opacity=12);  /* For IE */
+    filter: alpha(opacity = 12); /* For IE */
 
 }
 
@@ -183,71 +182,71 @@ PLEASE NOTE:
 }
 
 .yui-effect-fade .underlay {
-    display:none;
+    display: none;
 }
 
 .yui-panel {
-    visibility:hidden;
-    border-collapse:separate;
-    position:relative;
-    left:0;
-    top:0;
-    font:1em Arial;
-    background-color:#FFF;
-    border:1px solid #000;
-    z-index:1;
-    overflow:hidden;
+    visibility: hidden;
+    border-collapse: separate;
+    position: relative;
+    left: 0;
+    top: 0;
+    font: 1em Arial;
+    background-color: #FFF;
+    border: 1px solid #000;
+    z-index: 1;
+    overflow: hidden;
 }
 
 .yui-panel .hd {
-    background-color:#3d77cb;
-    color:#FFF;
-    font-size:100%;
-    line-height:100%;
-    border:1px solid #FFF;
-    border-bottom:1px solid #000;
-    font-weight:bold;
-    padding:4px;
-    white-space:nowrap;
+    background-color: #3d77cb;
+    color: #FFF;
+    font-size: 100%;
+    line-height: 100%;
+    border: 1px solid #FFF;
+    border-bottom: 1px solid #000;
+    font-weight: bold;
+    padding: 4px;
+    white-space: nowrap;
 }
 
 .yui-panel .bd {
-    overflow:hidden;
-    padding:4px;
+    overflow: hidden;
+    padding: 4px;
 }
 
 .yui-panel .bd p {
-    margin:0 0 1em;
+    margin: 0 0 1em;
 }
 
 .yui-panel .container-close {
-    position:absolute;
-    top:5px;
-    right:4px;
-    z-index:6;
-    height:12px;
-    width:12px;
-    margin:0px;
-    padding:0px;
-    background:url(close12_1.gif) no-repeat;
-    cursor:pointer;
-    visibility:inherit;
-    text-indent:-10000em;
-    overflow:hidden;
-    text-decoration:none;
+    position: absolute;
+    top: 5px;
+    right: 4px;
+    z-index: 6;
+    height: 12px;
+    width: 12px;
+    margin: 0px;
+    padding: 0px;
+    background: url(close12_1.gif) no-repeat;
+    cursor: pointer;
+    visibility: inherit;
+    text-indent: -10000em;
+    overflow: hidden;
+    text-decoration: none;
 }
 
 .yui-panel .ft {
-    padding:4px;
-    overflow:hidden;
+    padding: 4px;
+    overflow: hidden;
 }
 
 .yui-simple-dialog .bd .yui-icon {
-    background-repeat:no-repeat;
-    width:16px;
-    height:16px;
-    margin-right:10px;
-    float:left;
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;
+    float: left;
 }
 
 .yui-simple-dialog .bd span.blckicon {
@@ -276,49 +275,49 @@ PLEASE NOTE:
 
 .yui-dialog .ft,
 .yui-simple-dialog .ft {
-    padding-bottom:5px;
-    padding-right:5px;
-    text-align:right;
+    padding-bottom: 5px;
+    padding-right: 5px;
+    text-align: right;
 }
 
 .yui-dialog form,
 .yui-simple-dialog form {
-    margin:0;
+    margin: 0;
 }
 
 .button-group button {
-    font:100 76% verdana;
-    text-decoration:none;
+    font: 100 76% verdana;
+    text-decoration: none;
     background-color: #E4E4E4;
     color: #333;
     cursor: hand;
     vertical-align: middle;
     border: 2px solid #797979;
-    border-top-color:#FFF;
-    border-left-color:#FFF;
-    margin:2px;
-    padding:2px;
+    border-top-color: #FFF;
+    border-left-color: #FFF;
+    margin: 2px;
+    padding: 2px;
 }
 
 .button-group button.default {
-    font-weight:bold;
+    font-weight: bold;
 }
 
 .button-group button:hover,
 .button-group button.hover {
-    border:2px solid #90A029;
-    background-color:#EBF09E;
-    border-top-color:#FFF;
-    border-left-color:#FFF;
+    border: 2px solid #90A029;
+    background-color: #EBF09E;
+    border-top-color: #FFF;
+    border-left-color: #FFF;
 }
 
 .button-group button:active {
-    border:2px solid #E4E4E4;
-    background-color:#BBB;
-    border-top-color:#333;
-    border-left-color:#333;
+    border: 2px solid #E4E4E4;
+    background-color: #BBB;
+    border-top-color: #333;
+    border-left-color: #333;
 }
 
 .yui-override-padding {
-    padding:0 !important;
+    padding: 0 !important;
 }
