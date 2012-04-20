@@ -11,11 +11,11 @@ class IndexControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 
     public function testIndexAction()
     {
-        
+
         $this->dispatch('/index/index');
-        
+
         // assertions
-      
+
         $this->assertController('index');
         $this->assertAction('index');
         $this->assertQueryContentContains("div#welcome h3", "This is your project's main page");

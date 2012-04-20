@@ -7,7 +7,9 @@ class User_RegisterControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
     {
         $this->application = new Zend_Application(APPLICATION_ENV, APPLICATION_PATH . '/configs/application.ini');
         $this->application->bootstrap();
-        $this->getFrontController()->setParam('bootstrap', $this->application->getBootstrap());
+        $this
+            ->getFrontController()
+            ->setParam('bootstrap', $this->application->getBootstrap());
 
 
     }
@@ -36,7 +38,10 @@ class User_RegisterControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
     public function testFormError()
     {
 
-        $this->getRequest()->setMethod('POST')->setPost(
+        $this
+            ->getRequest()
+            ->setMethod('POST')
+            ->setPost(
             array(
                 'fname' => 'Jesse',
                 'lname' => 2,
@@ -56,7 +61,8 @@ class User_RegisterControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
     public function testSuccessfulRegister()
     {
 
-        $this->getRequest()
+        $this
+            ->getRequest()
             ->setMethod('POST')
             ->setPost(
             array(
@@ -84,7 +90,7 @@ class User_RegisterControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
             $this->assertEquals(0, $user->getActive());
             $this->assertEquals('0000-00-00 00:00:00', $user->getLastLogin());
             $this->assertEquals('jlswebdev', $user->getUsername());
-            $num = $delete->delete($user);
+            $num = $user->delete($user);
             $this->assertEquals(1, $num);
         }
     }
@@ -104,7 +110,8 @@ class User_RegisterControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
     {
         $this->_insertTestUser();
 
-        $this->getRequest()
+        $this
+            ->getRequest()
             ->setMethod('POST')
             ->setPost(
             array(
@@ -133,7 +140,8 @@ class User_RegisterControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
     {
         $this->_insertTestUser();
 
-        $this->getRequest()
+        $this
+            ->getRequest()
             ->setMethod('POST')
             ->setPost(
             array(
