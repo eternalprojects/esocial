@@ -41,12 +41,14 @@
   <apply executable="php" failonerror="true">
    <arg value="-l" />
 
-   <fileset dir="${basedir}">
+   <fileset dir="${basedir}/application">
     <include name="**/*.php" />
-    <exclude name="**/libray/Zend/*.*" />
     <modified />
    </fileset>
-
+      <fileset dir="${basedir}/library/eSocial">
+          <include name="**/*.php" />
+          <modified />
+      </fileset>
    <fileset dir="${basedir}/tests">
     <include name="**/*.php" />
     <modified />
