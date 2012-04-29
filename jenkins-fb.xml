@@ -56,10 +56,13 @@
  <target name="phploc" description="Measure project size using PHPLOC">
   <exec executable="phploc">
    <arg value="--exclude" />
-   <arg value="${basedir}/src/library/Zend" />
+   <arg value="${basedir}/library/Zend" />
+      <arg value="--exclude" />
+      <arg value="${basedir}/build" />
+
    <arg value="--log-csv" />
    <arg value="${basedir}/build/logs/phploc.csv" />
-   <arg path="${basedir}/src" />
+   <arg path="${basedir}" />
   </exec>
  </target>
 
@@ -68,21 +71,21 @@
    <arg value="--jdepend-xml=${basedir}/build/logs/jdepend.xml" />
    <arg value="--jdepend-chart=${basedir}/build/pdepend/dependencies.svg" />
    <arg value="--overview-pyramid=${basedir}/build/pdepend/overview-pyramid.svg" />
-   <arg value="--ignore=${basedir}/src/library/Zend" />
+   <arg value="--ignore=${basedir}/library/Zend,${basedir}/tests,${basedir}/build" />
    <arg value="--suffix=php,phtml" />
-   <arg path="${basedir}/src" />
+   <arg path="${basedir}" />
   </exec>
  </target>
 
  <target name="phpmd-ci" description="Perform project mess detection using PHPMD creating a log file for the continuous integration server">
   <exec executable="phpmd">
-   <arg path="${basedir}/src" />
+   <arg path="${basedir}" />
    <arg value="xml" />
    <arg value="naming,design,codesize,unusedcode" />
    <arg value="--suffixes" />
    <arg value="php,phtml" />
    <arg value="--exclude" />
-   <arg value="${basedir}/src/library/Zend,${basedir}/src/tests" />
+   <arg value="${basedir}/library/Zend,${basedir}/tests,${basedir}/build" />
    <arg value="--reportfile" />
    <arg value="${basedir}/build/logs/pmd.xml" />
   </exec>
@@ -94,8 +97,8 @@
    <arg value="--report-file=${basedir}/build/logs/checkstyle.xml" />
    <arg value="--standard=Zend" />
    <arg value="--extensions=php,phtml" />
-   <arg value="--ignore=${basedir}/src/library/Zend,${basedir}/src/tests" />
-   <arg path="${basedir}/src" />
+   <arg value="--ignore=${basedir}/library/Zend,${basedir}/tests,${basedir}/build" />
+   <arg path="${basedir}" />
   </exec>
  </target>
 
@@ -104,23 +107,25 @@
    <arg value="--log-pmd" />
    <arg value="${basedir}/build/logs/pmd-cpd.xml" />
    <arg value="--exclude" />
-   <arg value="${basedir}/src/library/Zend" />
+   <arg value="${basedir}/library/Zend" />
    <arg value="--exclude" />
-   <arg value="${basedir}/src/tests" />
+   <arg value="${basedir}/tests" />
+   <arg value="--exclude" />
+   <arg value="${basedir}/build" />
    <arg value="--suffixes" />
    <arg value="php" />
-   <arg path="${basedir}/src" />
+   <arg path="${basedir}" />
   </exec>
  </target>
 
  <target name="docblox">
   <exec dir="${basedir}" executable="docblox" failonerror="false">
-   <arg line="run -i ${basedir}/src/tests/*,${basedir}/src/library/Zend/* -e php -d ${basedir}/src -t ${basedir}/build/api" />
+   <arg line="run -i ${basedir}/tests/*,${basedir}/library/Zend/*,${basedir}/build/* -e php -d ${basedir} -t ${basedir}/build/api" />
   </exec>
  </target>
 
  <target name="phpunit" description="Run unit tests with PHPUnit">
-  <exec dir="${basedir}/src/tests" executable="phpunit" failonerror="true">
+  <exec dir="${basedir}/tests" executable="phpunit" failonerror="true">
    <arg line="--log-junit ${basedir}/build/logs/phpunit.xml
                        --coverage-clover ${basedir}/build/logs/clover.xml
                        --coverage-html ${basedir}/build/coverage" />
@@ -132,9 +137,11 @@
    <arg value="--log" />
    <arg path="${basedir}/build/logs" />
    <arg value="--source" />
-   <arg path="${basedir}/src" />
+   <arg path="${basedir}" />
    <arg value="-e" />
-   <arg path="${basedir}/src/library/Zend" />
+   <arg path="${basedir}/library/Zend" />
+   <arg value="-e" />
+   <arg path="${basedir}/build" />
    <arg value="--output" />
    <arg path="${basedir}/build/code-browser" />
   </exec>
