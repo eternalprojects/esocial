@@ -124,7 +124,7 @@
 
  <target name="docblox">
   <exec dir="${basedir}" executable="docblox" failonerror="false">
-   <arg line="run -i ${basedir}/tests/*,${basedir}/library/Zend/*,${basedir}/build/* -e php -d ${basedir} -t ${basedir}/build/api" />
+   <arg line="run -i ${basedir}/tests/*,${basedir}/library/Zend/*,${basedir}/build/* -e php -d ${basedir}/ -t ${basedir}/build/api" />
   </exec>
  </target>
 
