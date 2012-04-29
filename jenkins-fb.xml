@@ -43,6 +43,7 @@
 
    <fileset dir="${basedir}">
     <include name="**/*.php" />
+    <exclude name="**/libray/Zend/*.*" />
     <modified />
    </fileset>
 
@@ -50,6 +51,7 @@
     <include name="**/*.php" />
     <modified />
    </fileset>
+
   </apply>
  </target>
 
