@@ -123,8 +123,19 @@
  </target>
 
  <target name="docblox">
-  <exec dir="${basedir}" executable="docblox" failonerror="false">
-   <arg line="run -i ${basedir}/tests/*,${basedir}/library/Zend/*,${basedir}/build/* -e php -d ${basedir}/ -t ${basedir}/build/api" />
+  <exec dir="${basedir}" executable="phpdoc" failonerror="false">
+      <arg value="run" />
+      <arg value="--sourcecode" />
+      <arg value="--template" />
+      <arg value="responsive" />
+      <arg value="-1" />
+      <arg value="${basedir}/tests/*,${basedir}/library/Zend/*,${basedir}/build/*" />
+      <arg value="-e" />
+      <arg value="php" />
+      <arg value="-d" />
+      <arg value="${basedir}/" />
+      <arg value="-t" />
+      <arg value="${basedir}/build/api" />
   </exec>
  </target>
 
